@@ -11,6 +11,7 @@ use Hyn\Tenancy\Models\Hostname;
 use Hyn\Tenancy\Models\Website;
 use Illuminate\Console\Command;
 use Illuminate\Support\Facades\Hash;
+use App\Notifications\TenantCreated;
 
 class CreateTenant extends Command
 {
@@ -33,7 +34,8 @@ class CreateTenant extends Command
 
         // Switch over to the newly created Tenant
         app(Environment::class)->tenant($hostname->website);
-        $this->addAdmin($name, $email, $password);
+        $this->addAdmin($name, $email, $password)
+            ->notify(new TenantCreated($hostname));
 
         $this->info("Tenant '{$name}' is created and is now accessible at {$hostname->fqdn}");
         $this->info("Admin {$email} can log in using password {$password}");
