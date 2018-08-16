@@ -11,7 +11,19 @@
 |
 */
 
+Auth::routes();
+
+Route::get('/home', 'HomeController@index')->name('home');
+
 Route::get('/', function () {
+    return view('welcome', [
+        'title' => env('APP_NAME'),
+        'url' => env('APP_URL_BASE'),
+        'catchphase' => env('CATCH_PHASE')
+    ]);
+});
+
+Route::get('/home', function () {
     return view('welcome', [
         'title' => env('APP_NAME'),
         'url' => env('APP_URL_BASE'),

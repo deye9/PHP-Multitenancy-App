@@ -15,6 +15,7 @@ class RouteServiceProvider extends ServiceProvider
      * @var string
      */
     protected $namespace = 'App\Http\Controllers';
+    protected $tenantNamespace = 'App\Http\Controllers\Tenants';
 
     /**
      * Define your route model bindings, pattern filters, etc.
@@ -39,7 +40,7 @@ class RouteServiceProvider extends ServiceProvider
 
         $this->mapWebRoutes();
 
-        //
+        $this->mapTenantRoutes();
     }
 
     /**
@@ -69,5 +70,12 @@ class RouteServiceProvider extends ServiceProvider
              ->middleware('api')
              ->namespace($this->namespace)
              ->group(base_path('routes/api.php'));
+    }
+
+    protected function mapTenantRoutes()
+    {
+        Route::middleware('web')
+             ->namespace($this->tenantNamespace)
+             ->group(base_path('routes/tenants.php'));
     }
 }

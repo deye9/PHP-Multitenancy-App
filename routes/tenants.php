@@ -1,8 +1,3 @@
 <?php
 
-
-// Route::domain('{account}.erp.com')->group(function () {
-//     Route::get('user/{id}', function ($account, $id) {
-//         //
-//     });
-// });
+Route::get('/', 'App\Http\Controllers\Tenants\DefaultController@index');
