@@ -41465,10 +41465,6 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
-//
-//
-//
-//
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     data: function data() {
@@ -41479,7 +41475,7 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
     methods: {
         loadComponent: function loadComponent(value) {
             if (value.toLowerCase() === 'default') {
-                //         title: String, 
+                //         title: String,
                 // catchphase: String
                 location.reload();
             }
@@ -41531,7 +41527,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Staff Management")]
+                    [_vm._v("Lorem ipsum")]
                   )
                 ])
               ]),
@@ -41570,7 +41566,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Student Management")]
+                    [_vm._v("Lorem ipsum")]
                   )
                 ])
               ]),
@@ -41609,7 +41605,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Admission Process")]
+                    [_vm._v("Lorem ipsum")]
                   )
                 ])
               ]),
@@ -41652,7 +41648,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Question Bank")]
+                    [_vm._v("Lorem ipsum")]
                   )
                 ])
               ]),
@@ -41691,7 +41687,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Library Management")]
+                    [_vm._v("Lorem ipsum")]
                   )
                 ])
               ]),
@@ -41730,7 +41726,7 @@ var render = function() {
                         }
                       }
                     },
-                    [_vm._v("Communication")]
+                    [_vm._v("Lorem ipsum")]
                   )
                 ])
               ]),
@@ -41763,7 +41759,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("h3", [_vm._v("Staff Management")])
+              _c("h3", [_vm._v("Lorem ipsum")])
             ]),
             _vm._v(" "),
             _c("div", { staticClass: "p-2 flex-shrink-1 bd-highlight" }, [
@@ -41799,7 +41795,7 @@ var render = function() {
             ])
           ]),
           _vm._v(
-            "\n        Just like the students, the staff also has to be managed.\n        This includes everything right from their attendance to the salary. \n        It becomes difficult to manage the whole staff for the educational institution and hence, releasing salaries and other expenses becomes easy with the help of HR payroll software.\n        It also deals with the Teachers evaluation and the learning standards. Priorities to improve the teaching standards.\n    "
+            "\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n    "
           )
         ])
       : _vm._e(),
@@ -41826,7 +41822,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("h3", [_vm._v("Student Management")])
+              _c("h3", [_vm._v("Lorem ipsum")])
             ]),
             _vm._v(" "),
             _c(
@@ -41869,7 +41865,7 @@ var render = function() {
             )
           ]),
           _vm._v(
-            "\n        It can also manage the Student Data such as Students entire Database, Attendance & Behavior, Parent Portal, Event Management, Subjects and Teachers, Exams and Grades, Report cards and Analytics etc\n    "
+            "\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n    "
           )
         ])
       : _vm._e(),
@@ -41896,7 +41892,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("h3", [_vm._v("Admission Process")])
+              _c("h3", [_vm._v("Lorem ipsum")])
             ]),
             _vm._v(" "),
             _c(
@@ -41939,7 +41935,7 @@ var render = function() {
             )
           ]),
           _vm._v(
-            "\n        First and foremost an ERP must have what is required for the complete process of admission. Relevant data of any student of the institute must be easily accessible. Using this feature saves not only time and effort of the institute but also saves huge piles of stationary items that is used during the process of admission.\n    "
+            "\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n    "
           )
         ])
       : _vm._e(),
@@ -41966,7 +41962,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("h3", [_vm._v("Question Bank")])
+              _c("h3", [_vm._v("Lorem ipsum")])
             ]),
             _vm._v(" "),
             _c(
@@ -42009,7 +42005,7 @@ var render = function() {
             )
           ]),
           _vm._v(
-            "\n        It has the features like Question Banks, Author Questions, Quality check of Question paper, Curriculum mapping, Creating Assessments, manage groups, schedule and administer, Offline access, Mastery tracking and more.\n    "
+            "\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n    "
           )
         ])
       : _vm._e(),
@@ -42036,7 +42032,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("h3", [_vm._v("Library Management")])
+              _c("h3", [_vm._v("Lorem ipsum")])
             ]),
             _vm._v(" "),
             _c(
@@ -42079,7 +42075,7 @@ var render = function() {
             )
           ]),
           _vm._v(
-            "\n        Searches, finds, issues and returns the books properly. This feature also takes a continuous note of the condition of the book. This feature also keeps a track of the student account of the books.\n    "
+            "\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n    "
           )
         ])
       : _vm._e(),
@@ -42106,7 +42102,7 @@ var render = function() {
                 1
               ),
               _vm._v(" "),
-              _c("h3", [_vm._v("Communication")])
+              _c("h3", [_vm._v("Lorem ipsum")])
             ]),
             _vm._v(" "),
             _c(
@@ -42149,7 +42145,7 @@ var render = function() {
             )
           ]),
           _vm._v(
-            "\n        In-built ability to be able to notify the users, which includes the staff, students and parents of happenings e.g fees dues, holiday declaration, exam and the ongoing activities. This serves just like a notice board.\n    "
+            "\n        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n    "
           )
         ])
       : _vm._e()
@@ -42163,7 +42159,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-body" }, [
       _c("p", { staticClass: "card-text text-left" }, [
         _vm._v(
-          "\n                        This includes everything right from their attendance to the salary. It also deals with the Teachers evaluation and the learning standards. Priorities to improve the teaching standards etc\n                    "
+          "\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n                    "
         )
       ])
     ])
@@ -42175,7 +42171,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-body" }, [
       _c("p", { staticClass: "card-text text-left" }, [
         _vm._v(
-          "\n                        It can also manage the Student Data such as Students entire Database, Attendance & Behavior, Parent Portal, Event Management, Subjects and Teachers, Exams and Grades, Report cards and Analytics etc\n                    "
+          "\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n                    "
         )
       ])
     ])
@@ -42187,7 +42183,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-body" }, [
       _c("p", { staticClass: "card-text text-left" }, [
         _vm._v(
-          "\n                        First and foremost an ERP must have what is required for the complete process of admission. Relevant data of any student of the institute must be easily accessible. Using this feature saves not only time and effort of the institute but also saves huge piles of stationary items that is used during the process of admission.\n                    "
+          "\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n                    "
         )
       ])
     ])
@@ -42199,7 +42195,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-body" }, [
       _c("p", { staticClass: "card-text text-left" }, [
         _vm._v(
-          "\n                        It has the features like Question Banks, Author Questions, Quality check of Question paper, Curriculum mapping, Creating Assessments, manage groups, schedule and administer, Offline access, Mastery tracking and more…    \n                    "
+          "\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n                    "
         )
       ])
     ])
@@ -42211,9 +42207,11 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-body" }, [
       _c("p", { staticClass: "card-text text-left" }, [
         _vm._v(
-          "\n                        Searches, finds, issues and returns the books properly. This feature also takes a continuous note of the condition of the book. This feature also keeps a track of the student account of the books.\n                    "
+          "\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.                        "
         )
-      ])
+      ]),
+      _vm._v(" "),
+      _c("p")
     ])
   },
   function() {
@@ -42223,7 +42221,7 @@ var staticRenderFns = [
     return _c("div", { staticClass: "card-body" }, [
       _c("p", { staticClass: "card-text text-left" }, [
         _vm._v(
-          "\n                        In-built ability to be able to notify the users, which includes the staff, students and parents of happenings e.g fees dues, \n                        holiday declaration, exam and the ongoing activities. This serves just like a notice board.\n                    "
+          "\n                        Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.\n                    "
         )
       ])
     ])
