@@ -60,8 +60,10 @@
         @endif
     </nav>
 
-    <div id="content" class="m-t-2">
+    <div id="app" class="m-t-2">
         @yield('content')
+        <tenant-login key="login" v-if="activeview === 'login'"></tenant-login>
+
     </div>
 
     <footer class="footer" style="text-align: center;">
@@ -81,10 +83,8 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="{{ asset('js/main.js') }}"></script>
-
+    <script src="{{ asset('js/landing.js') }}"></script>
     @yield('scripts')
-
 </body>
 
 </html>

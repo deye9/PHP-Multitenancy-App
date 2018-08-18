@@ -60,6 +60,7 @@
         <div class="content">
             <div class="title m-b-md">
                 HYN Wins.
+                <br />
                 {{ $tenant_name }}
             </div>
 
