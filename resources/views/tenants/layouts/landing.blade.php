@@ -62,8 +62,6 @@
 
     <div id="app" class="m-t-2">
         @yield('content')
-        <tenant-login key="login" v-if="activeview === 'login'"></tenant-login>
-
     </div>
 
     <footer class="footer" style="text-align: center;">
