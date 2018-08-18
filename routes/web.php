@@ -16,11 +16,17 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', function () {
-    return view('welcome', [
-        'title' => env('APP_NAME'),
-        'url' => env('APP_URL_BASE'),
-        'catchphase' => env('CATCH_PHASE')
-    ]);
+    $url = env('APP_URL', '');
+
+    if (Request::fullUrl() == $url) {
+        // We are on a correct route!
+        return view('welcome', [
+            'title' => env('APP_NAME'),
+            'url' => env('APP_URL_BASE'),
+            'catchphase' => env('CATCH_PHASE')
+        ]);
+    }
+    return App::call('App\Http\Controllers\Tenants\DefaultController@index');
 });
 
 Route::get('/home', function () {
