@@ -181,11 +181,11 @@
             <div class="container">
                 <div>
                     <span class="text-muted"> &copy {{ Carbon::now()->year }}</span>
-                    <a href="https://www.konga.com/terms-conditions/">Terms of use</a>
+                    <a href="#">Terms of use</a>
                     |
-                    <a href="https://www.konga.com/help/privacy-policy/">Privacy</a>
+                    <a href="#">Privacy</a>
                     |
-                    <a href="https://www.konga.com/authentic-items-policy/"> Authentic Items</a>
+                    <a href="#"> Authentic Items</a>
                 </div>
             </div>
         </footer>

@@ -23,6 +23,7 @@
                     <h3 class="card-header">
                         Forgot your password?
                     </h3>
+
                     <div class="form-gap"></div>
 
                     <div class="card-body">
