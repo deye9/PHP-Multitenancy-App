@@ -15,7 +15,7 @@ Route::group(['middleware' => 'tenancy.enforce'], function () {
     Auth::routes();
 });
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', function () {
     $url = env('APP_URL', '');
@@ -32,9 +32,16 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    return view('welcome', [
-        'title' => env('APP_NAME'),
-        'url' => env('APP_URL_BASE'),
-        'catchphase' => env('CATCH_PHASE')
-    ]);
-});
+    $url = env('APP_URL', 'https://schoolerp.dev');
+
+    if (Request::fullUrl() == $url) {
+        // We are on a correct route!
+        return view('default', [
+            'title' => env('APP_NAME'),
+            'url' => env('APP_URL_BASE'),
+            'catchphase' => env('CATCH_PHASE')
+        ]);
+    }
+
+    return App::call('App\Http\Controllers\Tenants\DefaultController@home');
+})->name('home');
