@@ -23,13 +23,13 @@
 
     <nav class="navbar navbar-dark fixed-top bg-dark flex-md-nowrap p-0 shadow">
         @guest
-            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ url('/') }}"  title="Change to school Logo and get School Name">
-                <img src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ url('/') }}" title="Change to school Logo and get School Name">
+                <!-- <img src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" /> -->
                 {{ config('app.name', 'School ERP') }}
             </a>
         @else
-            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ route('home') }}"  title="Change to school Logo and get School Name" >
-                <img src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
+            <a class="navbar-brand col-sm-3 col-md-2 mr-0" href="{{ route('home') }}" title="Change to school Logo and get School Name" >
+                <!-- <img src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" /> -->
                 {{ config('app.name', 'School ERP') }}
             </a>
         @endguest
