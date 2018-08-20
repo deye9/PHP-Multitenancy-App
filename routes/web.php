@@ -32,7 +32,7 @@ Route::get('/', function () {
 });
 
 Route::get('/home', function () {
-    $url = env('APP_URL', 'https://schoolerp.dev');
+    $url = env('APP_URL', '');
 
     if (Request::fullUrl() == $url) {
         // We are on a correct route!
