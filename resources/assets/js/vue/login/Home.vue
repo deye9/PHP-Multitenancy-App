@@ -4,7 +4,7 @@
             <div class="title m-b-md">
                 HYN Wins.
                 <br />
-                {{ $tenant_name }}
+                Display tenant_name
             </div>
 
             <div class="links">

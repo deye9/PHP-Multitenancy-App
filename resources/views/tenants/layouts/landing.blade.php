@@ -41,7 +41,7 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="{{ asset('js/login.js') }}"></script>
+    <script src="{{ asset('js/tenantauth.js') }}"></script>
 
 </body>
 
