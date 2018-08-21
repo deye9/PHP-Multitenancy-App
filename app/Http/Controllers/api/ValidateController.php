@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Tenant;
+use App\Models\Tenant;
 use App\HttpStatusCode;
 use App\ResponseMessage;
 use Illuminate\Http\Request;

@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Tenant;
+use App\Models\Tenant;
 use Illuminate\Console\Command;
 
 class DeleteTenant extends Command
