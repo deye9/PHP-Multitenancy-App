@@ -35,26 +35,27 @@
                         </div>
 
                         <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <input id="Mobile No." name="Mobile No." placeholder="Mobile No." class="form-control" required="required" type="text">
+                            <div class="form-group col-md-6" v-bind:class="{ 'has-error': error && response.password }">
+                                <label for="password">Password</label>
+                                <input type="password" id="password" class="form-control" v-model="password" required>
+                                <span class="help-block" v-if="error && response.password">{{ response.password }}</span>
                             </div>
-                            <div class="form-group col-md-6">
 
-                                    <select id="inputState" class="form-control">
-                                        <option selected>Choose ...</option>
-                                        <option> New Buyer</option>
-                                        <option> Auction</option>
-                                        <option> Complaint</option>
-                                        <option> Feedback</option>
-                                    </select>
+                            <div class="form-group col-md-6">
+                                <label for="category">User Type</label>
+                                <select id="category" class="form-control">
+                                    <option selected>Choose ...</option>
+                                    <option> New Buyer</option>
+                                    <option> Auction</option>
+                                    <option> Complaint</option>
+                                    <option> Feedback</option>
+                                </select>
+                                <span class="help-block" v-if="error && response.category">{{ response.category }}</span>
                             </div>
+
                             <div class="form-group col-md-12">
-                                <div class="form-group" v-bind:class="{ 'has-error': error && response.password }">
-                <label for="password">Password</label>
-                <input type="password" id="password" class="form-control" v-model="password" required>
-                <span class="help-block" v-if="error && response.password">{{ response.password }}</span>
-            </div>
-                                    <textarea id="comment" name="comment" cols="40" rows="5" class="form-control"></textarea>
+                                <p>Kindly tell us more about your self.</p>
+                                <textarea id="comment" name="comment" cols="40" rows="5" class="form-control"></textarea>
                             </div>
                         </div>
 
@@ -103,6 +104,7 @@ export default {
             name: null,
             email: null,
             password: null,
+            category: null,
             success: false,
             error: false,
             response: null

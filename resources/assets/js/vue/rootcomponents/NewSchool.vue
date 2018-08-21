@@ -1,15 +1,15 @@
 <template>
 
     <div class="content">
-        
+
         <h2 class="text-center">Register Your School</h2>
-        
+
         <hr />
-                    
+
         <div class="row">
-        
+
             <div class="col-md-6">
-        
+
                 <div class="form-group">
                     <label for="schoolname" class="col-md-12 control-label field-label-responsive"> School Name </label>
                     <div class="col-md-12">
@@ -72,12 +72,12 @@
                     By clicking on <strong>"Register"</strong> you agree to {{title}}'s <strong>Policies</strong> which includes our
                     Terms of Use and Privacy policies.
                 </p>
-                
+
                 <p>
-                    While rare, each school is to draft out her respective Terms of Use and Privacy Policies. 
+                    While rare, each school is to draft out her respective Terms of Use and Privacy Policies.
                     Failure to draft it will result in the school been blacklisted from {{title}}.
                 </p>
-                
+
                 <p>
                     <strong>{{title}}</strong> will not be held responsible for any action should you fail to setup your Terms of Use and Privacy Policies.
                 </p>
@@ -97,7 +97,7 @@
 
                 <button id="RegSchool" type="button" class="btn btn-primary float-right" disabled @click="RegisterSchool">Register</button>
             </div>
-        
+
         </div>
 
     </div>
@@ -115,21 +115,21 @@
                 passwordconfirm: '',
                 profile: {
                     isAvailableURL: 'api/tenant/isavailable/',
-                    schoolRegistration: 'api/tenant/register',
+                    schoolRegistration: 'api/tenant/registerschool',
                     emailsError: 'Emails do not match. Kindly correct it.',
                     passwordError: 'Passwords do not match. Kindly correct it.',
                     isavailableError: 'Unfortunately we are unable to determine the status of your request. Please check your data and re-try. Thanks.'
                 }
             }
         },
-        props: { 
-            url: String, 
-            title: String 
+        props: {
+            url: String,
+            title: String
         },
         methods: {
             isfocused() {
 		        $('#pswd_info').show();
-            }, 
+            },
             isblured() {
                 $('#pswd_info').hide();
                 $('#space').removeClass('valid').addClass('invalid');
@@ -177,7 +177,7 @@
                 } else {
                     $('#length').removeClass('invalid').addClass('valid');
                 }
-                
+
                 //validate letter
                 if ( pswd.match(/[A-z]/) ) {
                     $('#letter').removeClass('invalid').addClass('valid');
@@ -198,7 +198,7 @@
                 } else {
                     $('#number').removeClass('valid').addClass('invalid');
                 }
-                
+
                 //validate space
                 if ( pswd.match(/[^a-zA-Z0-9\-\/]/) ) {
                     $('#space').removeClass('invalid').addClass('valid');
@@ -238,15 +238,15 @@
                 };
 
                 this.$http.post(this.profile.schoolRegistration, schooldata).then((response) => {
-                    this.$store.commit('response', { 
-                            status: response.body.status, 
+                    this.$store.commit('response', {
+                            status: response.body.status,
                             message: response.body.message
                         }
                     );
                 }, (error) => {
-                    this.$store.commit('response', { 
-                            status: 'Error', 
-                            message: error.body 
+                    this.$store.commit('response', {
+                            status: 'Error',
+                            message: error.body
                         }
                     );
 

@@ -12,7 +12,7 @@ Vue.use(VueResource);
 
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.getElementsByName('csrf-token')[0].getAttribute('content');
 Vue.http.headers.common['Authorization'] = 'Bearer ' + localStorage.getItem('id_token');
-Vue.http.options.root = 'https://boise.erp.dev/';
+Vue.http.options.root = 'https://pentaville.erp.dev/';
 
 Vue.config.productionTip = false;
 

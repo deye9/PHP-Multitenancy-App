@@ -7,10 +7,10 @@
                 </router-link>
                 <ul class="nav justify-content-end">
                     <li class="nav-item">
-                        <router-link :to="{ name: 'login' }" class="nav-link">Login</router-link>
+                        <router-link to="signin" class="nav-link">Login</router-link>
                     </li>
                     <li class="nav-item">
-                        <router-link :to="{ name: 'register' }" class="nav-link disabled">Register</router-link>
+                        <router-link to="register" class="nav-link disabled">Register</router-link>
                     </li>
                 </ul>
             </nav>
@@ -22,3 +22,24 @@
         </div>
     </div>
 </template>
+
+<script>
+    import auth from './auth.js'
+    export default {
+        data() {
+            return {
+                auth: auth
+            };
+        },
+        methods: {
+            signout() {
+                auth.signout()
+            }
+        },
+        mounted: function () {
+            this.$nextTick(function () {
+                auth.check()
+            });
+        }
+    }
+</script>

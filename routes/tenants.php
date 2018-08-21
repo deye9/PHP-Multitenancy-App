@@ -5,3 +5,4 @@
 // Route::group(['middleware' => 'tenancy.enforce'], function () {
 //     Auth::routes();
 // });
+
