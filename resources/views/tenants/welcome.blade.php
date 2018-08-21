@@ -56,12 +56,12 @@
 @stop
 
 @section('content')
-    <div class="flex-center position-ref full-height">
+    <!-- <div class="flex-center position-ref full-height">
         <div class="content">
             <div class="title m-b-md">
                 HYN Wins.
                 <br />
-                {{ $tenant_name }}
+                tenant_name
             </div>
 
             <div class="links">
@@ -72,7 +72,7 @@
                 <a href="https://github.com/laravel/laravel">GitHub</a>
             </div>
         </div>
-    </div>
+    </div> -->
 @endsection
 
 @section('scripts')

@@ -27,6 +27,9 @@ mix.copy([
     'vendor/components/font-awesome/css/fontawesome.min.css'
 ], 'public/css');
 
+// Copy the needed Js file for the auth front end
+mix.js('resources/assets/js/vue/login/login.js', 'public/js');
+
 mix.copyDirectory('node_modules/@fortawesome', 'resources/assets/js/vue/components/@fortawesome');
 
 if (mix.inProduction()) {

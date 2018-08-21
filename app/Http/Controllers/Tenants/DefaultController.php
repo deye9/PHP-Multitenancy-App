@@ -25,11 +25,11 @@ class DefaultController extends Controller
     */
     public function index()
     {
-        return view('tenants.welcome', ['tenant_name' => $this->getTenantName()]);
+        return view('tenants.welcome'); //, ['tenant_name' => $this->getTenantName()]);
     }
 
     public function home()
     {
-        return view('tenants.home', ['tenant_name' => $this->getTenantName()]);
+        return view('tenants.home'); //, ['tenant_name' => $this->getTenantName()]);
     }
 }

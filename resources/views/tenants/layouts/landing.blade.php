@@ -20,48 +20,8 @@
 
 <body>
 
-    <nav class="navbar navbar-dark bg-dark fixed-top">
-        @guest
-            <a class="navbar-brand" href="{{ url('/') }}"  title="Change to school Logo and get School Name">
-                <img src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
-                {{ config('app.name', 'School ERP') }}
-            </a>
-        @else
-            <a class="navbar-brand" href="{{ route('home') }}"  title="Change to school Logo and get School Name" >
-                <img src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
-                {{ config('app.name', 'School ERP') }}
-            </a>
-        @endguest
-
-        @if (Route::has('login'))
-            <ul class="nav justify-content-end">
-                @auth
-                    <li class="nav-item">
-                        <form class="navbar-form" role="search">
-                            <div class="input-group">
-                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </li>
-                @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="{{ route('register') }}">Register</a>
-                    </li>
-                @endauth
-            </ul>
-        @endif
-    </nav>
-
-    <div id="app" class="m-t-2">
-        @yield('content')
+    <div class="container">
+        <div id="app"></div>
     </div>
 
     <footer class="footer" style="text-align: center;">
@@ -81,8 +41,8 @@
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
     <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="{{ asset('js/landing.js') }}"></script>
-    @yield('scripts')
+    <script src="{{ asset('js/login.js') }}"></script>
+
 </body>
 
 </html>
