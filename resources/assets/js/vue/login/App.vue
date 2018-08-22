@@ -6,12 +6,18 @@
                     <img src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
                 </router-link>
                 <ul class="nav justify-content-end">
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="!auth.user.authenticated">
                         <router-link to="signin" class="nav-link">Login</router-link>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item" v-if="!auth.user.authenticated">
                         <router-link to="register" class="nav-link disabled">Register</router-link>
                     </li>
+                    <li class="nav-item" v-if="auth.user.authenticated">
+                        <a href="javascript:void(0)" v-on:click="signout">Sign out</a>
+                    </li>
+                    <!-- <li class="nav-item" v-if="auth.user.authenticated">
+                        Hi, {{ auth.user.profile.name }}
+                    </li> -->
                 </ul>
             </nav>
         </div>

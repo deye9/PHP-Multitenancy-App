@@ -16452,6 +16452,12 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
@@ -16511,34 +16517,51 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("ul", { staticClass: "nav justify-content-end" }, [
-            _c(
-              "li",
-              { staticClass: "nav-item" },
-              [
-                _c(
-                  "router-link",
-                  { staticClass: "nav-link", attrs: { to: "signin" } },
-                  [_vm._v("Login")]
+            !_vm.auth.user.authenticated
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      { staticClass: "nav-link", attrs: { to: "signin" } },
+                      [_vm._v("Login")]
+                    )
+                  ],
+                  1
                 )
-              ],
-              1
-            ),
+              : _vm._e(),
             _vm._v(" "),
-            _c(
-              "li",
-              { staticClass: "nav-item" },
-              [
-                _c(
-                  "router-link",
-                  {
-                    staticClass: "nav-link disabled",
-                    attrs: { to: "register" }
-                  },
-                  [_vm._v("Register")]
+            !_vm.auth.user.authenticated
+              ? _c(
+                  "li",
+                  { staticClass: "nav-item" },
+                  [
+                    _c(
+                      "router-link",
+                      {
+                        staticClass: "nav-link disabled",
+                        attrs: { to: "register" }
+                      },
+                      [_vm._v("Register")]
+                    )
+                  ],
+                  1
                 )
-              ],
-              1
-            )
+              : _vm._e(),
+            _vm._v(" "),
+            _vm.auth.user.authenticated
+              ? _c("li", { staticClass: "nav-item" }, [
+                  _c(
+                    "a",
+                    {
+                      attrs: { href: "javascript:void(0)" },
+                      on: { click: _vm.signout }
+                    },
+                    [_vm._v("Sign out")]
+                  )
+                ])
+              : _vm._e()
           ])
         ],
         1
