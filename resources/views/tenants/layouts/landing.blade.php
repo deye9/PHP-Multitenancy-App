@@ -18,9 +18,7 @@
 
 <body>
 
-    <div class="container">
-        <div id="app"></div>
-    </div>
+    <div id="app"></div>
 
     <footer class="footer" style="text-align: center;">
         <div class="container">

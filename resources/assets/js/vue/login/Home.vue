@@ -1,7 +1,7 @@
 <template>
     <div class="flex-center position-ref full-height">
         <div class="content">
-            <div class="title m-b-md">
+            <div class="title m-b-md" style="color: #636b6f;">
                 HYN Wins.
                 <br />
                 Display tenant_name
