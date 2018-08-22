@@ -258,7 +258,7 @@
     }
 </script>
 
-<style scoped>
+<style>
     #pswd_info {
         background: #dfdfdf none repeat scroll 0 0;
         color: #fff;

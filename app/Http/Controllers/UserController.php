@@ -12,7 +12,7 @@ class UserController extends Controller
         $data = [];
         $data['name'] = $request->user()->name;
         $data['email'] = $request->user()->email;
-        $data['menu'] = '';
+        $data['permissions'] = 'Dashboard, Profile';
         return response()->json([
             'data' => $data,
         ]);

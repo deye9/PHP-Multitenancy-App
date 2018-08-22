@@ -65,7 +65,7 @@
                                     <div class="form-check">
                                     <input class="form-check-input" type="checkbox" value="" id="invalidCheck2" required>
                                     <label class="form-check-label" for="invalidCheck2">
-                                        <small>By clicking Submit, you agree to our Terms & Conditions, Visitor Agreement and Privacy Policy.</small>
+                                        <small>By clicking Submit, you agree to our Terms of use, Visitor Agreement and Privacy Policy.</small>
                                     </label>
                                     </div>
                                 </div>

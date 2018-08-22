@@ -1,6 +1,7 @@
 <template>
 
     <section class="login-block">
+
         <br /><br />
         <div class="container">
 
@@ -29,16 +30,17 @@
                         </div>
 
                         <div class="form-check">
-                            <button type="submit" class="btn btn-login float-right"> Sign In </button>
+                            <button type="submit" class="btn btn-primary float-right">
+                                Sign In
+                                <font-awesome-icon icon="sign-in-alt" size="1x" />
+                            </button>
                         </div>
 
-                        <br />
-
-                        <a class="btn btn-link" href="password.request">
-                            Forgot Your Password?
-                        </a>
-
                     </form>
+
+                    <a class="btn btn-link float-left" href="password.request">
+                        Forgot Your Password?
+                    </a>
 
                 </div>
 
@@ -99,7 +101,7 @@
     }
 </script>
 
-<style scoped>
+<style>
     /* @import url("//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css"); */
     .login-block {
         height: 100vh;

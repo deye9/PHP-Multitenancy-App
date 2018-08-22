@@ -20,7 +20,10 @@ use Illuminate\Http\Request;
     Route::post('/registeruser', [
         'uses' => 'AuthController@register',
     ]);
-    Route::post('/signin',  'AuthController@signin');
+
+    Route::post('/signin',  [
+        'uses' => 'AuthController@signin',
+    ]);
     // Route::group(['middleware' => 'jwt.auth'], function () {
     //     Route::get('/api/user', [
     //         'uses' => 'App\Http\Controllers\UserController@index',

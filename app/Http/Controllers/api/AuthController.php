@@ -17,19 +17,14 @@ class AuthController extends Controller
 {
     protected $tag = 'Authentication Controller';
 
-    // public function __construct() {
-    //     // $this->middleware('jwt.auth', ['except' => ['signin']]);
-    //     \Log::info(1);
-    // }
-
-    // public function register(RegisterFormRequest $request)
-    // {
-    //     User::create([
-    //         'name' => $request->json('name'),
-    //         'email' => $request->json('email'),
-    //         'password' => bcrypt($request->json('password')),
-    //     ]);
-    // }
+    public function register(RegisterFormRequest $request)
+    {
+        User::create([
+            'name' => $request->json('name'),
+            'email' => $request->json('email'),
+            'password' => bcrypt($request->json('password')),
+        ]);
+    }
 
     public function signin(Request $request)
     {
@@ -50,13 +45,15 @@ class AuthController extends Controller
         } else {
             $data = [];
             $meta = [];
+            $permissions = [];
 
             $data['name'] = $request->user()->name;
             $meta['token'] = $token;
-
+            $permissions['menu'] = 'Dashboard, Profile';
             return response()->json([
                 'data' => $data,
-                'meta' => $meta
+                'meta' => $meta,
+                'permissions' => $permissions
             ]);
         }
     }

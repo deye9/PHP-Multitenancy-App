@@ -45,7 +45,7 @@
     }
 </script>
 
-<style scoped>
+<style>
 
     #notify {
         display: block;

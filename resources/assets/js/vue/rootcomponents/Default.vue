@@ -36,7 +36,7 @@
     }
 </script>
 
-<style scoped>
+<style>
 
     html, body {
         background-color: #fff;
