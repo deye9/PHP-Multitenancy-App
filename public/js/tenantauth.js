@@ -27017,6 +27017,9 @@ var actions = {
 
         __WEBPACK_IMPORTED_MODULE_0__tenantauth_js__["default"].http.post(actions.signinuser, { email: email, password: password }).then(function (response) {
             context.error = false;
+            var json = JSON.stringify(response.data.access.menu).replace(/\\/g, "").replace(/"{"/g, '{"').replace(/}"/g, '}');
+            json = JSON.parse(json);
+            console.log(json);
             sessionStorage.setItem('id_token', response.data.meta.token);
             __WEBPACK_IMPORTED_MODULE_0__tenantauth_js__["default"].http.headers.common['Authorization'] = 'Bearer ' + sessionStorage.getItem('id_token');
 

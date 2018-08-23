@@ -43,6 +43,11 @@ export default {
     signin(context, email, password) {
         Vue.http.post(actions.signinuser, { email: email, password: password }).then((response) => {
             context.error = false;
+
+            var json = JSON.stringify(response.data.access.menu).replace(/\\/g, "").replace(/"{"/g, '{"').replace(/}"/g, '}');
+            json = JSON.parse(json);
+            console.log(json);
+
             sessionStorage.setItem('id_token', response.data.meta.token);
             Vue.http.headers.common['Authorization'] = 'Bearer ' + sessionStorage.getItem('id_token');
 

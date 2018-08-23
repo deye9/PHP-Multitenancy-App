@@ -13,7 +13,8 @@
         "laravel/framework": "5.6.*",
         "laravel/tinker": "^1.0",
         "spatie/laravel-permission": "^2.15",
-        "twbs/bootstrap": "^4.1"
+        "twbs/bootstrap": "^4.1",
+        "tymon/jwt-auth": "^0.5.12"
     },
     "require-dev": {
         "filp/whoops": "^2.0",

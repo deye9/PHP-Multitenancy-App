@@ -13,12 +13,9 @@ use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\RegisterFormRequest;
 use Tymon\JWTAuth\Exceptions\JWTException;
-use Hyn\Tenancy\Traits\UsesTenantConnection;
 
 class AuthController extends Controller
 {
-    use UsesTenantConnection;
-
     protected $tag = 'Authentication Controller';
 
     public function register(RegisterFormRequest $request)
@@ -49,21 +46,21 @@ class AuthController extends Controller
         } else {
             $data = [];
             $meta = [];
-            $permissions = [];
 
             $user = User::find($request->user()->id);
             $roles = $user->getRoleNames();
 
-            $users = DB::select("select * from permission where menu->>'role_id' = '?'", [$request->user()->id]);
+            $permissions = DB::connection('tenant')->select("select * from permission where menu->>'role_id' = :id", ['id' => $request->user()->id]);
 
             // $data['role'] = $roles; //request->input('email');
             $meta['token'] = $token;
             $data['name'] = $request->user()->name;
-            $permissions['menu'] = $user->getAllPermissions();
+            $data['permissions'] = $user->getAllPermissions();
+            $data['menu'] = $permissions;
+
             return response()->json([
-                'data' => $data,
                 'meta' => $meta,
-                'permissions' => $permissions
+                'access' => $data
             ]);
         }
     }
