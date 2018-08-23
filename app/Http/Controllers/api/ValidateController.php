@@ -97,6 +97,13 @@ class ValidateController extends Controller
                 ], HttpStatusCode::BAD_REQUEST);
             }
 
+            if (!preg_match("/^([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/",$name)) {
+                return $this->jsonResponse([
+                    'err_status' => 'Error',
+                    'err_message' => 'Invalid School Name specified.'
+                ], HttpStatusCode::BAD_REQUEST);
+            }
+
             if (Tenant::tenantExists($name)) {
                 $msg = "{$name} already exists. " . ResponseMessage::SCHOOL_NAME_UNAVAILABLE;
                 Log::error("[ " . $this->tag . '::Is HostName Available ]: ' . $msg);
