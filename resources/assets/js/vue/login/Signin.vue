@@ -38,9 +38,9 @@
 
                     </form>
 
-                    <a class="btn btn-link float-left" href="password.request">
+                    <router-link to="reset" class="btn btn-link float-left">
                         Forgot Your Password?
-                    </a>
+                    </router-link>
 
                 </div>
 
@@ -94,8 +94,14 @@
         },
         methods: {
             signin(event) {
-                event.preventDefault()
-                auth.signin(this, this.email, this.password)
+                event.preventDefault();
+                if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email))
+                {
+                    auth.signin(this, this.email, this.password);
+                    return (true);
+                }
+                this.error = true;
+                alert('Invalid Email supplied.');
             }
         }
     }

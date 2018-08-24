@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use App\HttpStatusCode;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\MessageBag;
 use League\Fractal\TransformerAbstract;
@@ -18,7 +17,7 @@ trait RestResponseTrait
      * @param int $statusCode
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function getBadRequestException($message = 'Bad request', $statusCode = HttpStatusCode::BAD_REQUEST)
+    protected function getBadRequestException($message = 'Bad request', $statusCode = 400)
     {
         $response = ['code' => 'BAD_REQUEST'];
         $message = $message ?: 'Bad request';
@@ -42,7 +41,7 @@ trait RestResponseTrait
      */
     protected function getMethodNotImplementedException(
         $message = 'Method not implemented',
-        $statusCode = HttpStatusCode::NOT_FOUND
+        $statusCode = 404
     ) {
         return $this->jsonResponse(['code' => 'METHOD_NOT_IMPLEMENTED', 'message' => $message], $statusCode);
     }
@@ -56,7 +55,7 @@ trait RestResponseTrait
      */
     protected function getInternalServerError(
         $message = 'Internal Server Error',
-        $statusCode = HttpStatusCode::INTERNAL_SERVER_ERROR
+        $statusCode = 500
     ) {
         return $this->jsonResponse(['code' => 'INTERNAL_SERVER_ERROR', 'message' => $message], $statusCode);
     }
@@ -70,7 +69,7 @@ trait RestResponseTrait
      */
     protected function getMethodNotAllowedException(
         $message = 'Method Not Allowed',
-        $statusCode = HttpStatusCode::METHOD_NOT_ALLOWED
+        $statusCode = 405
     ) {
         return $this->jsonResponse(['code' => 'METHOD_NOT_ALLOWED', 'message' => $message], $statusCode);
     }
@@ -84,7 +83,7 @@ trait RestResponseTrait
      */
     protected function getModelNotFoundException(
         $message = 'Record Not Found',
-        $statusCode = HttpStatusCode::NOT_FOUND
+        $statusCode = 404
     ) {
         return $this->jsonResponse(['code' => 'NOT_FOUND', 'message' => $message], $statusCode);
     }
@@ -98,7 +97,7 @@ trait RestResponseTrait
      */
     protected function getUnauthorizedException(
         $message = 'Unauthorized access',
-        $statusCode = HttpStatusCode::UNAUTHORIZED
+        $statusCode = 401
     ) {
         return $this->jsonResponse(['code' => 'UNAUTHORIZED', 'message' => $message], $statusCode);
     }
@@ -110,7 +109,7 @@ trait RestResponseTrait
      * @param int $statusCode
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function jsonResponse(array $payload = null, $statusCode = HttpStatusCode::NOT_FOUND)
+    protected function jsonResponse(array $payload = null, $statusCode = 404)
     {
         $payload = $payload ?: [];
 
@@ -122,7 +121,7 @@ trait RestResponseTrait
      * @param int $statusCode
      * @return \Illuminate\Http\JsonResponse
      */
-    protected function jsonSuccessResponse(array $payload = null, $statusCode = HttpStatusCode::OK)
+    protected function jsonSuccessResponse(array $payload = null, $statusCode = 200)
     {
         return $this->jsonResponse(['data' => $payload], $statusCode);
     }
@@ -138,7 +137,7 @@ trait RestResponseTrait
         Model $item,
         $transformer,
         array $relationsToLoad = [],
-        $statusCode = HttpStatusCode::OK
+        $statusCode = 200
     ) {
 
         if ($relationsToLoad) {

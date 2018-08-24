@@ -4,6 +4,7 @@ import {router} from './tenantauth.js';
 var actions = {
     signinuser: 'api/signin',
     registeruser: 'api/registeruser',
+    resetpassword: 'api/resetpassword',
     emailsError: 'Emails do not match. Kindly correct it.',
     passwordError: 'Passwords do not match. Kindly correct it.',
     isavailableError: 'Unfortunately we are unable to determine the status of your request. Please check your data and re-try. Thanks.'
@@ -44,9 +45,9 @@ export default {
         Vue.http.post(actions.signinuser, { email: email, password: password }).then((response) => {
             context.error = false;
 
-            var json = JSON.stringify(response.data.access.menu).replace(/\\/g, "").replace(/"{"/g, '{"').replace(/}"/g, '}');
-            json = JSON.parse(json);
-            console.log(json);
+            // var json = JSON.stringify(response.data.access.menu).replace(/\\/g, "").replace(/"{"/g, '{"').replace(/}"/g, '}');
+            // json = JSON.parse(json);
+            // console.log(json);
 
             sessionStorage.setItem('id_token', response.data.meta.token);
             Vue.http.headers.common['Authorization'] = 'Bearer ' + sessionStorage.getItem('id_token');
@@ -56,6 +57,17 @@ export default {
 
             router.push({
                 name: 'dashboard'
+            });
+        }, (response) => {
+            context.error = true;
+        });
+    },
+    reset(context, email){
+        Vue.http.post(actions.resetpassword, { email: email }).then((response) => {
+            context.error = false;
+
+            router.push({
+                name: 'login'
             });
         }, (response) => {
             context.error = true;

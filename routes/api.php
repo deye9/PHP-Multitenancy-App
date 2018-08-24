@@ -24,6 +24,15 @@ use Illuminate\Http\Request;
     Route::post('/signin',  [
         'uses' => 'AuthController@signin',
     ]);
+
+    Route::group(['middleware' => 'tenancy.enforce'], function () {
+        Route::post('/resetpassword',  [
+            'uses' => 'AuthController@resetpassword',
+        ]);
+    });
+
+
+
     // Route::group(['middleware' => 'jwt.auth'], function () {
     //     Route::get('/api/user', [
     //         'uses' => 'App\Http\Controllers\UserController@index',

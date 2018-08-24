@@ -3,19 +3,20 @@
 namespace App\Http\Controllers\api;
 
 use JWTAuth;
-use Validator;
 use JWTFactory;
 use Carbon\Carbon;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
-use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\Controller;
+use Illuminate\Support\Facades\Password;
 use App\Http\Requests\RegisterFormRequest;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class AuthController extends Controller
 {
+    use SendsPasswordResetEmails;
     protected $tag = 'Authentication Controller';
 
     public function register(RegisterFormRequest $request)
@@ -27,6 +28,16 @@ class AuthController extends Controller
         ]);
     }
 
+    public function resetpassword(Request $request)
+    {
+        try
+        {
+            $this->sendResetLinkEmail($request);
+        } catch (Exception $e) {
+            return $this->error($this::ERROR_RESETTING_USER_PASSWORD);
+        }
+    }
+
     public function signin(Request $request)
     {
         try {
@@ -34,29 +45,22 @@ class AuthController extends Controller
                 'exp' => Carbon::now()->addWeek()->timestamp,
             ]);
         } catch (JWTException $e) {
-            return response()->json([
-                'error' => 'Could not authenticate',
-            ], 500);
+            return $this->error($this::USER_LOGIN_ERROR);
         }
 
         if (!$token) {
-            return response()->json([
-                'error' => 'Could not authenticate',
-            ], 401);
+            return $this->error($this::USER_LOGIN_ERROR);
         } else {
             $data = [];
             $meta = [];
 
             $user = User::find($request->user()->id);
             $roles = $user->getRoleNames();
+            //request->input('email');
 
-            $permissions = DB::connection('tenant')->select("select * from permission where menu->>'role_id' = :id", ['id' => $request->user()->id]);
-
-            // $data['role'] = $roles; //request->input('email');
             $meta['token'] = $token;
             $data['name'] = $request->user()->name;
-            $data['permissions'] = $user->getAllPermissions();
-            $data['menu'] = $permissions;
+            // $data['permissions'] = gettype($user->getAllPermissions());
 
             return response()->json([
                 'meta' => $meta,

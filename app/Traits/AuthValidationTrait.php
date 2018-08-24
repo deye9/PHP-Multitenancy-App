@@ -1,16 +1,16 @@
 <?php
 
-namespace App\Http\Validations;
+namespace App\Traits;
 
 use Illuminate\Support\Facades\Validator;
 
-class AuthValidation
+trait AuthValidationTrait
 {
     /**
      * Validation for Registering a new Tenant.
      * @return mixed
     */
-    public static function registerTenant($request) {
+    public function registerTenant($request) {
         $rule = [
             'name'   => 'required|string|max:100',
             'password'  => 'required|string|min:6',
@@ -19,6 +19,9 @@ class AuthValidation
         return Validator::make($request, $rule);
     }
 
+    protected function broker() {
+    }
+}
     // /**
     //  * Validation for Registering a new user.
     //  * @return mixed
@@ -149,4 +152,4 @@ class AuthValidation
     //         'password' => 'required|string|min:6|confirmed',
     //     ];
     // }
-}
+
