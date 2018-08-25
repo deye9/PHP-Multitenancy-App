@@ -22,23 +22,71 @@ class AuthController extends Controller
 
     protected $tag = 'Authentication Controller';
 
-    public function register(RegisterFormRequest $request)
-    {
-        User::create([
-            'name' => $request->json('name'),
-            'email' => $request->json('email'),
-            'password' => bcrypt($request->json('password')),
-        ]);
+    public function getpermissions($token) {
+        try {
+            $data = [];
+            $meta = [];
+            $meta['token'] = $token;
+
+            if (!$user = JWTAuth::toUser($token)) {
+                return response()->json(['code' => 404, 'message' => 'user_not_found']);
+            } else {
+                $user = JWTAuth::toUser($token);
+
+                // Get user alongside all user permissions.
+                $user = User::find($user->id);
+                $permissons = $user->getAllPermissions();
+
+                // Unset all un-needed properties.
+                unset($user->id);
+                unset($user->created_at);
+                unset($user->updated_at);
+                unset($user->permissions);
+
+                foreach ($user->roles as $role) {
+                    unset($role->pivot);
+                    unset($role->created_at);
+                    unset($role->updated_at);
+                    unset($role->guard_name);
+                }
+
+                foreach ($permissons as $obj) {
+                    unset($obj->pivot);
+                    unset($obj->guard_name);
+                    unset($obj->created_at);
+                    unset($obj->updated_at);
+                 }
+
+                $data['user'] = $user;
+                return response()->json(['code' => 200, 'data' => $data, 'meta' => $meta]);
+            }
+        } catch (Exception $e) {
+            return response()->json(['code' => 404, 'message' => 'Something went wrong']);
+        }
     }
 
-    public function forgotpassword(Request $request)
+    public function signin(Request $request)
     {
-        try
-        {
-            $this->sendResetLinkEmail($request);
-        } catch (Exception $e) {
-            return $this->error($this::ERROR_RESETTING_USER_PASSWORD);
+        try {
+            $token = JWTAuth::attempt($request->only('email', 'password'), [
+                'exp' => Carbon::now()->addWeek()->timestamp,
+            ]);
+        } catch (JWTException $e) {
+            return $this->error($e, $this::USER_LOGIN_ERROR);
         }
+
+        if (!$token) {
+            return response()->json([
+                'Credentials' => $this::USER_LOGIN_ERROR
+            ]);
+        } else {
+            return $this->getpermissions($token);
+        }
+    }
+
+    public function vettoken(Request $request)
+    {
+        return $this->getpermissions($request->all());
     }
 
     public function resetpassword(Request $request)
@@ -71,36 +119,22 @@ class AuthController extends Controller
         }
     }
 
-    public function signin(Request $request)
+    public function forgotpassword(Request $request)
     {
-        try {
-            $token = JWTAuth::attempt($request->only('email', 'password'), [
-                'exp' => Carbon::now()->addWeek()->timestamp,
-            ]);
-        } catch (JWTException $e) {
-            return $this->error($e, $this::USER_LOGIN_ERROR);
+        try
+        {
+            $this->sendResetLinkEmail($request);
+        } catch (Exception $e) {
+            return $this->error($this::ERROR_RESETTING_USER_PASSWORD);
         }
+    }
 
-        if (!$token) {
-            return response()->json([
-                'Credentials' => $this::USER_LOGIN_ERROR
-            ]);
-        } else {
-            $data = [];
-            $meta = [];
-
-            $user = User::find($request->user()->id);
-            $roles = $user->getRoleNames();
-            //request->input('email');
-
-            $meta['token'] = $token;
-            $data['name'] = $request->user()->name;
-            // $data['permissions'] = gettype($user->getAllPermissions());
-
-            return response()->json([
-                'meta' => $meta,
-                'access' => $data
-            ]);
-        }
+    public function register(RegisterFormRequest $request)
+    {
+        User::create([
+            'name' => $request->json('name'),
+            'email' => $request->json('email'),
+            'password' => bcrypt($request->json('password')),
+        ]);
     }
 }

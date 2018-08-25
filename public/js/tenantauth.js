@@ -7148,6 +7148,7 @@ var autoReplace = function autoReplace() {
 
 
 var actions = {
+    check: 'api/user?token=',
     signinuser: 'api/signin',
     registeruser: 'api/registeruser',
     resetpassword: 'api/resetpassword',
@@ -7162,16 +7163,22 @@ var actions = {
         profile: null,
         authenticated: false
     },
+    buildmenu: function buildmenu(data) {
+        this.user.profile = data.data;
+        this.user.authenticated = true;
+        // var json = JSON.stringify(response.data.access.menu).replace(/\\/g, "").replace(/"{"/g, '{"').replace(/}"/g, '}');
+        // json = JSON.parse(json);
+        // console.log(json);
+    },
     check: function check() {
         var _this = this;
 
         var token = sessionStorage.getItem('id_token');
         if (token !== null) {
-            __WEBPACK_IMPORTED_MODULE_0__tenantauth_js__["default"].http.get('api/user?token=' + token).then(function (response) {
-                _this.user.authenticated = true;
-                _this.user.profile = response.data.data;
+            __WEBPACK_IMPORTED_MODULE_0__tenantauth_js__["default"].http.get(actions.check + token).then(function (response) {
+                _this.buildmenu(response.data);
             });
-        };
+        }
     },
     mountresetcomponents: function mountresetcomponents() {
         __WEBPACK_IMPORTED_MODULE_0__tenantauth_js__["router"].push({
@@ -7196,15 +7203,10 @@ var actions = {
         __WEBPACK_IMPORTED_MODULE_0__tenantauth_js__["default"].http.post(actions.signinuser, { email: email, password: password }).then(function (response) {
             context.error = false;
 
-            // var json = JSON.stringify(response.data.access.menu).replace(/\\/g, "").replace(/"{"/g, '{"').replace(/}"/g, '}');
-            // json = JSON.parse(json);
-            // console.log(json);
-
             sessionStorage.setItem('id_token', response.data.meta.token);
             __WEBPACK_IMPORTED_MODULE_0__tenantauth_js__["default"].http.headers.common['Authorization'] = 'Bearer ' + sessionStorage.getItem('id_token');
 
-            _this2.user.authenticated = true;
-            _this2.user.profile = response.data.data;
+            _this2.buildmenu(response.data);
 
             __WEBPACK_IMPORTED_MODULE_0__tenantauth_js__["router"].push({
                 name: 'dashboard'
@@ -7231,7 +7233,6 @@ var actions = {
         }
         var token = location.pathname.replace('/password/reset/', '');
 
-        // https://pentaville.erp.dev/password/reset/03b7269c8eb97e072bf64d38c2687ff99bd2dab8516d5f6578baeff2ceb8aff8#/reset
         __WEBPACK_IMPORTED_MODULE_0__tenantauth_js__["default"].http.post(actions.resetpassword, { email: email, password: password, password_confirmation: password_confirmation, token: token }).then(function (response) {
             context.error = false;
 
@@ -7242,8 +7243,6 @@ var actions = {
             context.error = true;
         });
     },
-
-    // reset(this, this.email, this.password, this.password_confirmation);
     signout: function signout() {
         sessionStorage.removeItem('id_token');
         this.user.authenticated = false;
@@ -42531,7 +42530,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n.feather[data-v-0a8e6103] {\n    width: 16px;\n    height: 16px;\n    vertical-align: text-bottom;\n}\n\n/* Sidebar */\n.sidebar[data-v-0a8e6103] {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 100; /* Behind the navbar */\n    padding: 48px 0 0; /* Height of navbar */\n    -webkit-box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);\n            box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);\n}\n.sidebar-sticky[data-v-0a8e6103] {\n    position: relative;\n    top: 0;\n    height: calc(100vh - 48px);\n    padding-top: 0.5rem;\n    overflow-x: hidden;\n    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */\n}\n@supports ((position: -webkit-sticky) or (position: sticky)) {\n.sidebar-sticky[data-v-0a8e6103] {\n        position: -webkit-sticky;\n        position: sticky;\n}\n}\n.sidebar .nav-link[data-v-0a8e6103] {\n    font-weight: 500;\n    color: #333;\n}\n.sidebar .nav-link .feather[data-v-0a8e6103] {\n    margin-right: 4px;\n    color: #999;\n}\n.sidebar .nav-link.active[data-v-0a8e6103] {\n    color: #007bff;\n}\n.sidebar .nav-link:hover .feather[data-v-0a8e6103], .sidebar .nav-link.active .feather[data-v-0a8e6103] {\n    color: inherit;\n}\n.sidebar-heading[data-v-0a8e6103] {\n    font-size: 0.75rem;\n    text-transform: uppercase;\n}\n\n/* Content */\n[role=\"main\"][data-v-0a8e6103] {\n    padding-top: 48px; /* Space for fixed navbar */\n}\n", ""]);
+exports.push([module.i, "\n.feather[data-v-0a8e6103] {\n    width: 16px;\n    height: 16px;\n    vertical-align: text-bottom;\n}\n\n/* Sidebar */\n.sidebar[data-v-0a8e6103] {\n    position: fixed;\n    top: 0;\n    bottom: 0;\n    left: 0;\n    z-index: 100; /* Behind the navbar */\n    padding: 48px 0 0; /* Height of navbar */\n    -webkit-box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);\n            box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);\n}\n.sidebar-sticky[data-v-0a8e6103] {\n    position: relative;\n    top: 0;\n    height: calc(100vh - 48px);\n    padding-top: 0.5rem;\n    overflow-x: hidden;\n    overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */\n}\n@supports ((position: -webkit-sticky) or (position: sticky)) {\n.sidebar-sticky[data-v-0a8e6103] {\n        position: -webkit-sticky;\n        position: sticky;\n}\n}\n.sidebar .nav-link[data-v-0a8e6103] {\n    font-weight: 500;\n    color: #333;\n}\n.sidebar .nav-link .feather[data-v-0a8e6103] {\n    margin-right: 4px;\n    color: #999;\n}\n.sidebar .nav-link.active[data-v-0a8e6103] {\n    color: #007bff;\n}\n.sidebar .nav-link:hover .feather[data-v-0a8e6103], .sidebar .nav-link.active .feather[data-v-0a8e6103] {\n    color: inherit;\n}\n.sidebar-heading[data-v-0a8e6103] {\n    font-size: 0.75rem;\n    text-transform: uppercase;\n}\n\n/* Content */\n[role=\"main\"][data-v-0a8e6103] {\n    padding-top: 48px; /* Space for fixed navbar */\n}\n.accordion[data-v-0a8e6103] {\n    background-color: #eee;\n    color: #444;\n    cursor: pointer;\n    padding: 18px;\n    width: 100%;\n    border: none;\n    text-align: left;\n    outline: none;\n    font-size: 15px;\n    -webkit-transition: 0.4s;\n    transition: 0.4s;\n}\n.accordion[data-v-0a8e6103]:hover {\n    background-color: #ccc;\n}\n.accordion[data-v-0a8e6103]:after {\n    content: '+';\n    color: #777;\n    font-weight: bold;\n    float: right;\n    margin-left: 5px;\n}\n.panel[data-v-0a8e6103] {\n    padding: 0 18px;\n    background-color: white;\n    max-height: 0;\n    overflow: hidden;\n    -webkit-transition: max-height 0.2s ease-out;\n    transition: max-height 0.2s ease-out;\n}\n", ""]);
 
 // exports
 
@@ -42848,12 +42847,89 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 //
 //
 //
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
     mounted: function mounted() {
-        //var ctx = document.getElementById("myChart");
         var chart = this.$refs.chart;
         var ctx = chart.getContext("2d");
         var myChart = new __WEBPACK_IMPORTED_MODULE_0_chart_js___default.a(ctx, {
@@ -42882,6 +42958,21 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             }
         });
+
+        var i;
+        var acc = document.getElementsByClassName("accordion");
+
+        for (i = 0; i < acc.length; i++) {
+            acc[i].addEventListener("click", function () {
+                this.classList.toggle("active");
+                var panel = this.nextElementSibling;
+                if (panel.style.maxHeight) {
+                    panel.style.maxHeight = null;
+                } else {
+                    panel.style.maxHeight = panel.scrollHeight + "px";
+                }
+            });
+        }
     }
 });
 
@@ -55497,7 +55588,7 @@ var render = function() {
       _c("div", { staticClass: "sidebar-sticky" }, [
         _c("ul", { staticClass: "nav flex-column" }, [
           _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link active", attrs: { href: "#" } }, [
+            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
               _c(
                 "svg",
                 {
@@ -55523,7 +55614,7 @@ var render = function() {
                   _c("polyline", { attrs: { points: "9 22 9 12 15 12 15 22" } })
                 ]
               ),
-              _vm._v("\n                Dashboard "),
+              _vm._v("\n                    Dashboard "),
               _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
             ])
           ]),
@@ -55556,7 +55647,7 @@ var render = function() {
                   _c("polyline", { attrs: { points: "13 2 13 9 20 9" } })
                 ]
               ),
-              _vm._v("\n                Orders\n                ")
+              _vm._v("\n                    Orders\n                    ")
             ])
           ]),
           _vm._v(" "),
@@ -55589,7 +55680,7 @@ var render = function() {
                   })
                 ]
               ),
-              _vm._v("\n                Products\n                ")
+              _vm._v("\n                    Products\n                    ")
             ])
           ]),
           _vm._v(" "),
@@ -55620,7 +55711,7 @@ var render = function() {
                   _c("path", { attrs: { d: "M16 3.13a4 4 0 0 1 0 7.75" } })
                 ]
               ),
-              _vm._v("\n                Customers\n                ")
+              _vm._v("\n                    Customers\n                    ")
             ])
           ]),
           _vm._v(" "),
@@ -55654,7 +55745,7 @@ var render = function() {
                   })
                 ]
               ),
-              _vm._v("\n                Reports\n                ")
+              _vm._v("\n                    Reports\n                    ")
             ])
           ]),
           _vm._v(" "),
@@ -55684,7 +55775,7 @@ var render = function() {
                   _c("polyline", { attrs: { points: "2 12 12 17 22 12" } })
                 ]
               ),
-              _vm._v("\n                Integrations\n                ")
+              _vm._v("\n                    Integrations\n                    ")
             ])
           ])
         ]),
@@ -55772,7 +55863,9 @@ var render = function() {
                   _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
                 ]
               ),
-              _vm._v("\n                Current month\n                ")
+              _vm._v(
+                "\n                    Current month\n                    "
+              )
             ])
           ]),
           _vm._v(" "),
@@ -55811,7 +55904,7 @@ var render = function() {
                   _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
                 ]
               ),
-              _vm._v("\n                Last quarter\n                ")
+              _vm._v("\n                    Last quarter\n                    ")
             ])
           ]),
           _vm._v(" "),
@@ -55850,7 +55943,9 @@ var render = function() {
                   _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
                 ]
               ),
-              _vm._v("\n                Social engagement\n                ")
+              _vm._v(
+                "\n                    Social engagement\n                    "
+              )
             ])
           ]),
           _vm._v(" "),
@@ -55889,10 +55984,194 @@ var render = function() {
                   _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
                 ]
               ),
-              _vm._v("\n                Year-end sale\n                ")
+              _vm._v(
+                "\n                    Year-end sale\n                    "
+              )
             ])
           ])
-        ])
+        ]),
+        _vm._v(" "),
+        _c("button", { staticClass: "accordion" }, [_vm._v("Saved Reports")]),
+        _vm._v(" "),
+        _c("div", { staticClass: "panel" }, [
+          _c("ul", { staticClass: "nav flex-column mb-2" }, [
+            _c("li", { staticClass: "nav-item" }, [
+              _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "feather feather-file-text",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      width: "24",
+                      height: "24",
+                      viewBox: "0 0 24 24",
+                      fill: "none",
+                      stroke: "currentColor",
+                      "stroke-width": "2",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      }
+                    }),
+                    _c("polyline", { attrs: { points: "14 2 14 8 20 8" } }),
+                    _c("line", {
+                      attrs: { x1: "16", y1: "13", x2: "8", y2: "13" }
+                    }),
+                    _c("line", {
+                      attrs: { x1: "16", y1: "17", x2: "8", y2: "17" }
+                    }),
+                    _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
+                  ]
+                ),
+                _vm._v(
+                  "\n                        Current month\n                        "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "feather feather-file-text",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      width: "24",
+                      height: "24",
+                      viewBox: "0 0 24 24",
+                      fill: "none",
+                      stroke: "currentColor",
+                      "stroke-width": "2",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      }
+                    }),
+                    _c("polyline", { attrs: { points: "14 2 14 8 20 8" } }),
+                    _c("line", {
+                      attrs: { x1: "16", y1: "13", x2: "8", y2: "13" }
+                    }),
+                    _c("line", {
+                      attrs: { x1: "16", y1: "17", x2: "8", y2: "17" }
+                    }),
+                    _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
+                  ]
+                ),
+                _vm._v(
+                  "\n                        Last quarter\n                        "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "feather feather-file-text",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      width: "24",
+                      height: "24",
+                      viewBox: "0 0 24 24",
+                      fill: "none",
+                      stroke: "currentColor",
+                      "stroke-width": "2",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      }
+                    }),
+                    _c("polyline", { attrs: { points: "14 2 14 8 20 8" } }),
+                    _c("line", {
+                      attrs: { x1: "16", y1: "13", x2: "8", y2: "13" }
+                    }),
+                    _c("line", {
+                      attrs: { x1: "16", y1: "17", x2: "8", y2: "17" }
+                    }),
+                    _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
+                  ]
+                ),
+                _vm._v(
+                  "\n                        Social engagement\n                        "
+                )
+              ])
+            ]),
+            _vm._v(" "),
+            _c("li", { staticClass: "nav-item" }, [
+              _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
+                _c(
+                  "svg",
+                  {
+                    staticClass: "feather feather-file-text",
+                    attrs: {
+                      xmlns: "http://www.w3.org/2000/svg",
+                      width: "24",
+                      height: "24",
+                      viewBox: "0 0 24 24",
+                      fill: "none",
+                      stroke: "currentColor",
+                      "stroke-width": "2",
+                      "stroke-linecap": "round",
+                      "stroke-linejoin": "round"
+                    }
+                  },
+                  [
+                    _c("path", {
+                      attrs: {
+                        d:
+                          "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
+                      }
+                    }),
+                    _c("polyline", { attrs: { points: "14 2 14 8 20 8" } }),
+                    _c("line", {
+                      attrs: { x1: "16", y1: "13", x2: "8", y2: "13" }
+                    }),
+                    _c("line", {
+                      attrs: { x1: "16", y1: "17", x2: "8", y2: "17" }
+                    }),
+                    _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
+                  ]
+                ),
+                _vm._v(
+                  "\n                        Year-end sale\n                        "
+                )
+              ])
+            ])
+          ])
+        ]),
+        _vm._v(" "),
+        _c("button", { staticClass: "accordion" }, [_vm._v("Section 1")]),
+        _vm._v(" "),
+        _vm._m(0),
+        _vm._v(" "),
+        _c("button", { staticClass: "accordion" }, [_vm._v("Section 2")]),
+        _vm._v(" "),
+        _vm._m(1),
+        _vm._v(" "),
+        _c("button", { staticClass: "accordion" }, [_vm._v("Section 3")]),
+        _vm._v(" "),
+        _vm._m(2)
       ])
     ]),
     _vm._v(" "),
@@ -55903,7 +56182,7 @@ var render = function() {
         attrs: { role: "main" }
       },
       [
-        _vm._m(0),
+        _vm._m(3),
         _vm._v(" "),
         _c(
           "div",
@@ -55915,7 +56194,7 @@ var render = function() {
             _c("h1", { staticClass: "h2" }, [_vm._v("Dashboard")]),
             _vm._v(" "),
             _c("div", { staticClass: "btn-toolbar mb-2 mb-md-0" }, [
-              _vm._m(1),
+              _vm._m(4),
               _vm._v(" "),
               _c(
                 "button",
@@ -55978,12 +56257,48 @@ var render = function() {
         _vm._v(" "),
         _c("h2", [_vm._v("Section title")]),
         _vm._v(" "),
-        _vm._m(2)
+        _vm._m(5)
       ]
     )
   ])
 }
 var staticRenderFns = [
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel" }, [
+      _c("p", [
+        _vm._v(
+          "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel" }, [
+      _c("p", [
+        _vm._v(
+          "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        )
+      ])
+    ])
+  },
+  function() {
+    var _vm = this
+    var _h = _vm.$createElement
+    var _c = _vm._self._c || _h
+    return _c("div", { staticClass: "panel" }, [
+      _c("p", [
+        _vm._v(
+          "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
+        )
+      ])
+    ])
+  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

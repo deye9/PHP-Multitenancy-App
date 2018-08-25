@@ -13,7 +13,6 @@ use Illuminate\Http\Request;
 |
 */
 
-//Route::group(['prefix' => 'tenant'], function() {
     Route::post('/registerschool', 'ValidateController@register')->name('register');
     Route::get('/isavailable/{name}', 'ValidateController@isavailable')->name('isavailable');
 
@@ -36,13 +35,11 @@ use Illuminate\Http\Request;
     });
 
 
-
-    // Route::group(['middleware' => 'jwt.auth'], function () {
-    //     Route::get('/api/user', [
-    //         'uses' => 'App\Http\Controllers\UserController@index',
-    //     ]);
-    // });
-//});
+    Route::group(['middleware' => 'jwt.auth'], function () {
+        Route::get('/user', [
+            'uses' => 'AuthController@vettoken',
+        ]);
+    });
 
 // Route::middleware('auth:api')->get('/user', function (Request $request) {
 //     return $request->user();

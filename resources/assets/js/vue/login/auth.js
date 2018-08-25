@@ -2,6 +2,7 @@ import Vue from './tenantauth.js';
 import {router} from './tenantauth.js';
 
 var actions = {
+    check: 'api/user?token=',
     signinuser: 'api/signin',
     registeruser: 'api/registeruser',
     resetpassword: 'api/resetpassword',
@@ -16,16 +17,20 @@ export default {
         profile: null,
         authenticated: false
     },
+    buildmenu(data) {
+        this.user.profile = data.data;
+        this.user.authenticated = true;
+        // var json = JSON.stringify(response.data.access.menu).replace(/\\/g, "").replace(/"{"/g, '{"').replace(/}"/g, '}');
+        // json = JSON.parse(json);
+        // console.log(json);
+    },
     check() {
-        let token = sessionStorage.getItem('id_token');
+        var token = sessionStorage.getItem('id_token');
         if (token !== null) {
-            Vue.http.get(
-                'api/user?token=' + token
-            ).then(response => {
-                this.user.authenticated = true;
-                this.user.profile = response.data.data;
+            Vue.http.get(actions.check + token).then((response) => {
+                this.buildmenu(response.data);
             });
-        };
+        }
     },
     mountresetcomponents() {
         router.push({
@@ -51,15 +56,10 @@ export default {
         Vue.http.post(actions.signinuser, { email: email, password: password }).then((response) => {
             context.error = false;
 
-            // var json = JSON.stringify(response.data.access.menu).replace(/\\/g, "").replace(/"{"/g, '{"').replace(/}"/g, '}');
-            // json = JSON.parse(json);
-            // console.log(json);
-
             sessionStorage.setItem('id_token', response.data.meta.token);
             Vue.http.headers.common['Authorization'] = 'Bearer ' + sessionStorage.getItem('id_token');
 
-            this.user.authenticated = true;
-            this.user.profile = response.data.data;
+            this.buildmenu(response.data);
 
             router.push({
                 name: 'dashboard'
@@ -96,7 +96,6 @@ export default {
             context.error = true;
         });
     },
-    // reset(this, this.email, this.password, this.password_confirmation);
     signout() {
         sessionStorage.removeItem('id_token');
         this.user.authenticated = false;
