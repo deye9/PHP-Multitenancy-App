@@ -12,11 +12,12 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Password;
 use App\Http\Requests\RegisterFormRequest;
 use Tymon\JWTAuth\Exceptions\JWTException;
+use Illuminate\Foundation\Auth\ResetsPasswords;
 use Illuminate\Foundation\Auth\SendsPasswordResetEmails;
 
 class AuthController extends Controller
 {
-    use SendsPasswordResetEmails;
+    use SendsPasswordResetEmails, ResetsPasswords;
     protected $tag = 'Authentication Controller';
 
     public function register(RegisterFormRequest $request)
@@ -28,7 +29,7 @@ class AuthController extends Controller
         ]);
     }
 
-    public function resetpassword(Request $request)
+    public function forgotpassword(Request $request)
     {
         try
         {
@@ -38,6 +39,16 @@ class AuthController extends Controller
         }
     }
 
+    public function resetpassword(Request $request)
+    {
+        try
+        {
+            \Log::info(5678);
+            $this->reset($request);
+        } catch (Exception $e) {
+            return $this->error($this::ERROR_RESETTING_USER_PASSWORD);
+        }
+    }
     public function signin(Request $request)
     {
         try {

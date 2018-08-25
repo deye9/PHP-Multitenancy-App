@@ -26,13 +26,17 @@ use Illuminate\Http\Request;
     ]);
 
     Route::group(['middleware' => 'tenancy.enforce'], function () {
-        Route::post('/resetpassword',  [
-            'uses' => 'AuthController@resetpassword',
+        Route::post('/forgotpassword',  [
+            'uses' => 'AuthController@forgotpassword',
         ]);
+
+
     });
 
 
-
+        Route::post('/resetpassword', [
+            'uses' => 'AuthController@resetpassword',
+        ]);
     // Route::group(['middleware' => 'jwt.auth'], function () {
     //     Route::get('/api/user', [
     //         'uses' => 'App\Http\Controllers\UserController@index',

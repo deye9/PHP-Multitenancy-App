@@ -1,11 +1,12 @@
 import Vue from 'vue';
 import App from './App.vue';
 import Home from './Home.vue';
+import Reset from './Reset.vue';
 import Signin from './Signin.vue';
 import VueRouter from 'vue-router';
 import Register from './Register.vue';
 import VueResource from 'vue-resource';
-import Reset from './PasswordReset.vue';
+import ForgotPassword from './ForgotPassword.vue';
 import Dashboard from './Dashboard.vue';
 import { library } from '../components/@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '../components/@fortawesome/vue-fontawesome';
@@ -46,6 +47,11 @@ export var router = new VueRouter({
             path: '/signin',
             name: 'login',
             component: Signin
+        },
+        {
+            path: '/forgotpassword',
+            name: 'forgotpassword',
+            component: ForgotPassword
         },
         {
             path: '/reset',

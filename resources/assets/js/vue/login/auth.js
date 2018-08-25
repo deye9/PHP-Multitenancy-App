@@ -5,6 +5,7 @@ var actions = {
     signinuser: 'api/signin',
     registeruser: 'api/registeruser',
     resetpassword: 'api/resetpassword',
+    forgotpassword: 'api/forgotpassword',
     emailsError: 'Emails do not match. Kindly correct it.',
     passwordError: 'Passwords do not match. Kindly correct it.',
     isavailableError: 'Unfortunately we are unable to determine the status of your request. Please check your data and re-try. Thanks.'
@@ -25,6 +26,11 @@ export default {
                 this.user.profile = response.data.data;
             });
         };
+    },
+    mountresetcomponents() {
+        router.push({
+            name: 'reset'
+        });
     },
     register(context, name, email, password) {
         Vue.http.post(
@@ -62,8 +68,8 @@ export default {
             context.error = true;
         });
     },
-    reset(context, email){
-        Vue.http.post(actions.resetpassword, { email: email }).then((response) => {
+    forgotpassword(context, email) {
+        Vue.http.post(actions.forgotpassword, { email: email }).then((response) => {
             context.error = false;
 
             router.push({
@@ -73,6 +79,25 @@ export default {
             context.error = true;
         });
     },
+    reset(context, email, password, password_confirmation) {
+        if (password !== password_confirmation) {
+            context.error = true;
+            return (false);
+        }
+        var token = location.pathname.replace('/password/reset/', '');
+
+// https://pentaville.erp.dev/password/reset/03b7269c8eb97e072bf64d38c2687ff99bd2dab8516d5f6578baeff2ceb8aff8#/reset
+        Vue.http.post(actions.resetpassword, { email: email, password: password, password_confirmation: password_confirmation, token: token }).then((response) => {
+            context.error = false;
+
+            router.push({
+                name: 'login'
+            });
+        }, (response) => {
+            context.error = true;
+        });
+    },
+    // reset(this, this.email, this.password, this.password_confirmation);
     signout() {
         sessionStorage.removeItem('id_token');
         this.user.authenticated = false;

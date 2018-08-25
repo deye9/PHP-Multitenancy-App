@@ -38,7 +38,7 @@
 
                     </form>
 
-                    <router-link to="reset" class="btn btn-link float-left">
+                    <router-link to="forgotpassword" class="btn btn-link float-left">
                         Forgot Your Password?
                     </router-link>
 

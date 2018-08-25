@@ -31,7 +31,7 @@
                                 Kindly input the Email address you used to register / log into to your account
                                 We'll send you an email with instructions to choose a new password.
                             </p>
-                            <form class="login-form form" autocomplete="off" v-on:submit="passwordreset">
+                            <form class="form" autocomplete="off" v-on:submit="forgotpassword">
 
                                 <div class="input-group">
                                     <div class="input-group-prepend">
@@ -70,11 +70,11 @@
             }
         },
         methods: {
-            passwordreset(event) {
+            forgotpassword(event) {
                 event.preventDefault();
                 if (/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(this.email))
                 {
-                    auth.reset(this, this.email);
+                    auth.forgotpassword(this, this.email);
                     return (true);
                 }
                 this.error = true;

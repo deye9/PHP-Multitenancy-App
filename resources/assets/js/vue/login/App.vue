@@ -110,8 +110,12 @@
             }
         },
         mounted: function () {
+            if (location.pathname.toLocaleLowerCase().includes("/password/reset/"))
+            {
+                auth.mountresetcomponents();
+            }
             this.$nextTick(function () {
-                auth.check()
+                auth.check();
             });
         }
     }
