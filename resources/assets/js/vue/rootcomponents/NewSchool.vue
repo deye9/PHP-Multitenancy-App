@@ -63,7 +63,7 @@
                     <div class="col-md-12">
                         <input type="text" class="form-control" name="schoolname" id="schoolname" placeholder="Enter your Tenant Name" tabindex="1" required v-model.trim="schoolname" @blur="isvalid" />
                     </div>
-                    <!-- <span class="input-group-text" id="urlspan">.{{url}}</span> -->
+                    <span class="input-group-text form-control" id="urlspan">.{{url}}</span>
                 </div>
 
                 <div class="form-group">

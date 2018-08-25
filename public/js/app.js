@@ -43032,7 +43032,10 @@ var render = function() {
           _vm._v(" "),
           _c(
             "span",
-            { staticClass: "input-group-text", attrs: { id: "urlspan" } },
+            {
+              staticClass: "input-group-text form-control",
+              attrs: { id: "urlspan" }
+            },
             [_vm._v("." + _vm._s(_vm.url))]
           )
         ]),
