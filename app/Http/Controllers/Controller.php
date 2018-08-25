@@ -61,7 +61,7 @@ class Controller extends BaseController
     public const ERROR_CREATING_SCHOOL = 'An error occurred while trying to create your School';
     public const EMAIL_INVALID = 'Looks like the email you supplied is not a valid email address.';
 
-    public const USER_LOGIN_ERROR = 'An error occurred while trying to authenticate the user';
+    public const USER_LOGIN_ERROR = 'An error occurred while trying to authenticate the user. Kindly re-confirm your Credentials.';
     public const ERROR_RESETTING_USER_PASSWORD = 'An error occurred while trying to reset user password';
 
     // Remove.
@@ -107,7 +107,7 @@ class Controller extends BaseController
     //     ], 404);
     // } // return $this->notFound('foo not found');
 
-    public function error($message = null, Exception $ex) {
+    public function error(Exception $ex, $message = null) {
         return response()->json([
           'message' => $message ?? 'an error occurred',
           'exception' => $ex

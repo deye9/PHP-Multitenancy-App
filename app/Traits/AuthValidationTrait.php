@@ -19,6 +19,15 @@ trait AuthValidationTrait
         return Validator::make($request, $rule);
     }
 
+    public function passwordReset(Array $request) {
+        $rule = [
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|confirmed|min:6',
+        ];
+        return Validator::make($request, $rule);
+    }
+
     protected function broker() {
     }
 }

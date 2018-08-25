@@ -86,7 +86,6 @@ export default {
         }
         var token = location.pathname.replace('/password/reset/', '');
 
-// https://pentaville.erp.dev/password/reset/03b7269c8eb97e072bf64d38c2687ff99bd2dab8516d5f6578baeff2ceb8aff8#/reset
         Vue.http.post(actions.resetpassword, { email: email, password: password, password_confirmation: password_confirmation, token: token }).then((response) => {
             context.error = false;
 
