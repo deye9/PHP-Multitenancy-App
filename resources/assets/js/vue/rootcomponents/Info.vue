@@ -1,6 +1,6 @@
 <template>
 
-    <div class="content">
+    <div class="container">
 
         <div v-if="infoview === 'moreInfo'">
 

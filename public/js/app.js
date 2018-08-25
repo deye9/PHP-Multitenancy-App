@@ -41629,7 +41629,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content" }, [
+  return _c("div", { staticClass: "container" }, [
     _vm.infoview === "moreInfo"
       ? _c("div", [
           _c("div", { staticClass: "card-deck" }, [
@@ -42585,7 +42585,7 @@ var __vue_template_functional__ = false
 /* styles */
 var __vue_styles__ = injectStyle
 /* scopeId */
-var __vue_scopeId__ = null
+var __vue_scopeId__ = "data-v-15181fd8"
 /* moduleIdentifier (server only) */
 var __vue_module_identifier__ = null
 var Component = normalizeComponent(
@@ -42628,13 +42628,13 @@ var content = __webpack_require__(198);
 if(typeof content === 'string') content = [[module.i, content, '']];
 if(content.locals) module.exports = content.locals;
 // add the styles to the DOM
-var update = __webpack_require__(8)("3f0d7107", content, false, {});
+var update = __webpack_require__(8)("5965a160", content, false, {});
 // Hot Module Replacement
 if(false) {
  // When the styles change, update the <style> tags
  if(!content.locals) {
-   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15181fd8\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NewSchool.vue", function() {
-     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15181fd8\",\"scoped\":false,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NewSchool.vue");
+   module.hot.accept("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15181fd8\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NewSchool.vue", function() {
+     var newContent = require("!!../../../../../node_modules/css-loader/index.js!../../../../../node_modules/vue-loader/lib/style-compiler/index.js?{\"vue\":true,\"id\":\"data-v-15181fd8\",\"scoped\":true,\"hasInlineConfig\":true}!../../../../../node_modules/vue-loader/lib/selector.js?type=styles&index=0!./NewSchool.vue");
      if(typeof newContent === 'string') newContent = [[module.id, newContent, '']];
      update(newContent);
    });
@@ -42652,7 +42652,7 @@ exports = module.exports = __webpack_require__(7)(false);
 
 
 // module
-exports.push([module.i, "\n#pswd_info {\n    background: #dfdfdf none repeat scroll 0 0;\n    color: #fff;\n}\n#pswd_info h4{\n    background: black none repeat scroll 0 0;\n    display: block;\n    font-size: 14px;\n    letter-spacing: 0;\n    padding: 17px 0;\n    text-align: center;\n    text-transform: uppercase;\n}\n#pswd_info ul {\n    list-style: outside none none;\n}\n#pswd_info ul li {\n    padding: 10px 45px;\n}\n.valid {\n    color: green;\n    line-height: 21px;\n    padding-left: 22px;\n}\n.invalid {\n    color: red;\n    line-height: 21px;\n    padding-left: 22px;\n}\n#pswd_info::before {\n    background: #dfdfdf none repeat scroll 0 0;\n    content: \"\";\n    -webkit-transform: rotate(45deg);\n            transform: rotate(45deg);\n    width: 25px;\n}\n#pswd_info {\n    display:none;\n}\n", ""]);
+exports.push([module.i, "\n#pswd_info[data-v-15181fd8] {\n    background: #dfdfdf none repeat scroll 0 0;\n    color: #fff;\n}\n#pswd_info h4[data-v-15181fd8]{\n    background: black none repeat scroll 0 0;\n    display: block;\n    font-size: 14px;\n    letter-spacing: 0;\n    padding: 17px 0;\n    text-align: center;\n    text-transform: uppercase;\n}\n#pswd_info ul[data-v-15181fd8] {\n    list-style: outside none none;\n}\n#pswd_info ul li[data-v-15181fd8] {\n    padding: 10px 45px;\n}\n.valid[data-v-15181fd8] {\n    color: green;\n    line-height: 21px;\n    padding-left: 22px;\n}\n.invalid[data-v-15181fd8] {\n    color: red;\n    line-height: 21px;\n    padding-left: 22px;\n}\n#pswd_info[data-v-15181fd8]::before {\n    background: #dfdfdf none repeat scroll 0 0;\n    content: \"\";\n    -webkit-transform: rotate(45deg);\n            transform: rotate(45deg);\n    width: 25px;\n}\n#pswd_info[data-v-15181fd8] {\n    display:none;\n}\n", ""]);
 
 // exports
 
@@ -42663,6 +42663,49 @@ exports.push([module.i, "\n#pswd_info {\n    background: #dfdfdf none repeat scr
 
 "use strict";
 Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
+//
 //
 //
 //
@@ -42932,7 +42975,7 @@ var render = function() {
   var _vm = this
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
-  return _c("div", { staticClass: "content" }, [
+  return _c("div", { staticClass: "container" }, [
     _c("h2", { staticClass: "text-center" }, [_vm._v("Register Your Tenant")]),
     _vm._v(" "),
     _c("hr"),
@@ -42950,54 +42993,48 @@ var render = function() {
           ),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-12" }, [
-            _c("div", { staticClass: "input-group" }, [
-              _vm._m(0),
-              _vm._v(" "),
-              _c("input", {
-                directives: [
-                  {
-                    name: "model",
-                    rawName: "v-model.trim",
-                    value: _vm.schoolname,
-                    expression: "schoolname",
-                    modifiers: { trim: true }
+            _c("input", {
+              directives: [
+                {
+                  name: "model",
+                  rawName: "v-model.trim",
+                  value: _vm.schoolname,
+                  expression: "schoolname",
+                  modifiers: { trim: true }
+                }
+              ],
+              staticClass: "form-control",
+              attrs: {
+                type: "text",
+                name: "schoolname",
+                id: "schoolname",
+                placeholder: "Enter your Tenant Name",
+                tabindex: "1",
+                required: ""
+              },
+              domProps: { value: _vm.schoolname },
+              on: {
+                blur: [
+                  _vm.isvalid,
+                  function($event) {
+                    _vm.$forceUpdate()
                   }
                 ],
-                staticClass: "form-control",
-                attrs: {
-                  type: "text",
-                  name: "schoolname",
-                  id: "schoolname",
-                  placeholder: "Enter your School Name",
-                  tabindex: "1",
-                  required: ""
-                },
-                domProps: { value: _vm.schoolname },
-                on: {
-                  blur: [
-                    _vm.isvalid,
-                    function($event) {
-                      _vm.$forceUpdate()
-                    }
-                  ],
-                  input: function($event) {
-                    if ($event.target.composing) {
-                      return
-                    }
-                    _vm.schoolname = $event.target.value.trim()
+                input: function($event) {
+                  if ($event.target.composing) {
+                    return
                   }
+                  _vm.schoolname = $event.target.value.trim()
                 }
-              }),
-              _vm._v(" "),
-              _c("div", { staticClass: "input-group-append" }, [
-                _c(
-                  "span",
-                  { staticClass: "input-group-text", attrs: { id: "urlspan" } },
-                  [_vm._v("." + _vm._s(_vm.url))]
-                )
-              ])
-            ])
-          ])
+              }
+            })
+          ]),
+          _vm._v(" "),
+          _c(
+            "span",
+            { staticClass: "input-group-text", attrs: { id: "urlspan" } },
+            [_vm._v("." + _vm._s(_vm.url))]
+          )
         ]),
         _vm._v(" "),
         _c("div", { staticClass: "form-group" }, [
@@ -43215,7 +43252,7 @@ var render = function() {
         _vm._v(" "),
         _c("hr"),
         _vm._v(" "),
-        _vm._m(1),
+        _vm._m(0),
         _vm._v(" "),
         _c(
           "button",
@@ -43231,17 +43268,6 @@ var render = function() {
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("span", { staticClass: "input-group-addon" }, [
-      _c("i", {
-        staticClass: "glyphicon glyphicon-user",
-        attrs: { "aria-hidden": "true" }
-      })
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

@@ -1,6 +1,54 @@
+<style scoped>
+    #pswd_info {
+        background: #dfdfdf none repeat scroll 0 0;
+        color: #fff;
+    }
+
+    #pswd_info h4{
+        background: black none repeat scroll 0 0;
+        display: block;
+        font-size: 14px;
+        letter-spacing: 0;
+        padding: 17px 0;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    #pswd_info ul {
+        list-style: outside none none;
+    }
+
+    #pswd_info ul li {
+        padding: 10px 45px;
+    }
+
+    .valid {
+        color: green;
+        line-height: 21px;
+        padding-left: 22px;
+    }
+
+    .invalid {
+        color: red;
+        line-height: 21px;
+        padding-left: 22px;
+    }
+
+    #pswd_info::before {
+        background: #dfdfdf none repeat scroll 0 0;
+        content: "";
+        transform: rotate(45deg);
+        width: 25px;
+    }
+
+    #pswd_info {
+        display:none;
+    }
+</style>
+
 <template>
 
-    <div class="content">
+    <div class="container">
 
         <h2 class="text-center">Register Your Tenant</h2>
 
@@ -13,14 +61,9 @@
                 <div class="form-group">
                     <label for="schoolname" class="col-md-12 control-label field-label-responsive"> Tenant Name </label>
                     <div class="col-md-12">
-                        <div class="input-group">
-                            <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="schoolname" id="schoolname" placeholder="Enter your Tenant Name" tabindex="1" required v-model.trim="schoolname" @blur="isvalid" />
-                            <div class="input-group-append">
-                                <span class="input-group-text" id="urlspan">.{{url}}</span>
-                            </div>
-                        </div>
+                        <input type="text" class="form-control" name="schoolname" id="schoolname" placeholder="Enter your Tenant Name" tabindex="1" required v-model.trim="schoolname" @blur="isvalid" />
                     </div>
+                    <!-- <span class="input-group-text" id="urlspan">.{{url}}</span> -->
                 </div>
 
                 <div class="form-group">
@@ -258,50 +301,4 @@
     }
 </script>
 
-<style>
-    #pswd_info {
-        background: #dfdfdf none repeat scroll 0 0;
-        color: #fff;
-    }
 
-    #pswd_info h4{
-        background: black none repeat scroll 0 0;
-        display: block;
-        font-size: 14px;
-        letter-spacing: 0;
-        padding: 17px 0;
-        text-align: center;
-        text-transform: uppercase;
-    }
-
-    #pswd_info ul {
-        list-style: outside none none;
-    }
-
-    #pswd_info ul li {
-        padding: 10px 45px;
-    }
-
-    .valid {
-        color: green;
-        line-height: 21px;
-        padding-left: 22px;
-    }
-
-    .invalid {
-        color: red;
-        line-height: 21px;
-        padding-left: 22px;
-    }
-
-    #pswd_info::before {
-        background: #dfdfdf none repeat scroll 0 0;
-        content: "";
-        transform: rotate(45deg);
-        width: 25px;
-    }
-
-    #pswd_info {
-        display:none;
-    }
-</style>

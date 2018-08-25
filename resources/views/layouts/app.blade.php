@@ -35,7 +35,7 @@
 
         </nav>
 
-        <div id="app" class="container">
+        <div id="app">
 
             <app-default key="default" v-if="activeview === 'default'" :title="'{{$title}}'" :catchphase="'{{$catchphase}}'"></app-default>
             <app-info key="moreInfo" v-if="activeview === 'moreInfo'" style="margin-top:100px;"></app-info>
