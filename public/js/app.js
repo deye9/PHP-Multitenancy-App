@@ -42531,7 +42531,7 @@ var render = function() {
               }
             }
           },
-          [_vm._v(" Register School ")]
+          [_vm._v(" Register Tenant ")]
         ),
         _vm._v(" "),
         _c(
@@ -42933,7 +42933,7 @@ var render = function() {
   var _h = _vm.$createElement
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "content" }, [
-    _c("h2", { staticClass: "text-center" }, [_vm._v("Register Your School")]),
+    _c("h2", { staticClass: "text-center" }, [_vm._v("Register Your Tenant")]),
     _vm._v(" "),
     _c("hr"),
     _vm._v(" "),
@@ -42946,7 +42946,7 @@ var render = function() {
               staticClass: "col-md-12 control-label field-label-responsive",
               attrs: { for: "schoolname" }
             },
-            [_vm._v(" School Name ")]
+            [_vm._v(" Tenant Name ")]
           ),
           _vm._v(" "),
           _c("div", { staticClass: "col-md-12" }, [

@@ -2,7 +2,7 @@
 
     <div class="content">
 
-        <h2 class="text-center">Register Your School</h2>
+        <h2 class="text-center">Register Your Tenant</h2>
 
         <hr />
 
@@ -11,11 +11,11 @@
             <div class="col-md-6">
 
                 <div class="form-group">
-                    <label for="schoolname" class="col-md-12 control-label field-label-responsive"> School Name </label>
+                    <label for="schoolname" class="col-md-12 control-label field-label-responsive"> Tenant Name </label>
                     <div class="col-md-12">
                         <div class="input-group">
                             <span class="input-group-addon"><i class="glyphicon glyphicon-user" aria-hidden="true"></i></span>
-                            <input type="text" class="form-control" name="schoolname" id="schoolname" placeholder="Enter your School Name" tabindex="1" required v-model.trim="schoolname" @blur="isvalid" />
+                            <input type="text" class="form-control" name="schoolname" id="schoolname" placeholder="Enter your Tenant Name" tabindex="1" required v-model.trim="schoolname" @blur="isvalid" />
                             <div class="input-group-append">
                                 <span class="input-group-text" id="urlspan">.{{url}}</span>
                             </div>

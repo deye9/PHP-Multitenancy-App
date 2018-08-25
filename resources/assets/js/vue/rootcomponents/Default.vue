@@ -10,7 +10,7 @@
             </div>
 
             <div class="links">
-                <a href="javascript:null" @click="showComponent('registerSchool')"> Register School </a>
+                <a href="javascript:null" @click="showComponent('registerSchool')"> Register Tenant </a>
                 <a href="javascript:null" @click="showComponent('moreInfo')"> More Info </a>
                 <a href="javascript:null">FAQS</a>
                 <a href="javascript:null">Watch Videos</a>
@@ -25,7 +25,7 @@
 <script>
     export default {
         props : {
-            title: String, 
+            title: String,
             catchphase: String
         },
         methods: {
