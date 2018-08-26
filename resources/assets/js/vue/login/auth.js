@@ -18,11 +18,28 @@ export default {
         authenticated: false
     },
     buildmenu(data) {
+        var Menu = [];
         this.user.profile = data.data;
         this.user.authenticated = true;
-        // var json = JSON.stringify(response.data.access.menu).replace(/\\/g, "").replace(/"{"/g, '{"').replace(/}"/g, '}');
-        // json = JSON.parse(json);
-        // console.log(json);
+        var _roles = data.data.user.roles;
+
+        $.each(_roles, function(key, value) {
+            // Get all Unique Parent Names
+            var _permissions = value.permissions;
+            var UniqueParentNames = $.unique(_permissions.map(function (d) {
+                return d.parent_name;
+            }));
+
+            // Get all child menu associated with the parent and log into an array.
+            $.each(UniqueParentNames, function( key, value ) {
+                Menu[value] = $.map(_permissions, function( a, index ) {
+                    if (a.parent_name === value)
+                    return [ a.name ];
+                });
+            });
+        });
+
+        console.log(Menu);
     },
     check() {
         var token = sessionStorage.getItem('id_token');
@@ -105,4 +122,4 @@ export default {
             name: 'home'
         });
     }
-}
+};

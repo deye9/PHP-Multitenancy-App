@@ -16,7 +16,7 @@ class TenantDatabaseSeeder extends Seeder
     {
         // create permissions for an admin alongside all default permissions.
         Permission::create(['parent_name' => 'dashboard','name' => 'dashboard']);
-        $adminPermissions = collect(['users', 'metadata', 'profile', 'permissions', 'roles'])->map(function ($name) {
+        $adminPermissions = collect(['users', 'metadata', 'permissions', 'roles'])->map(function ($name) {
             return Permission::create(['parent_name' => 'administration','name' => $name]);
         });
 
