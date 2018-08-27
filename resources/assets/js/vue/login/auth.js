@@ -18,7 +18,7 @@ export default {
         authenticated: false
     },
     buildmenu(data) {
-        var Menu = [];
+        var Menu = {};
         this.user.profile = data.data;
         this.user.authenticated = true;
         var _roles = data.data.user.roles;
@@ -32,14 +32,40 @@ export default {
 
             // Get all child menu associated with the parent and log into an array.
             $.each(UniqueParentNames, function( key, value ) {
-                Menu[value] = $.map(_permissions, function( a, index ) {
+                var localMenuScope = [];
+                localMenuScope.push($.map(_permissions, function( a, index ) {
                     if (a.parent_name === value)
                     return [ a.name ];
-                });
+                }));
+                Menu[value] = localMenuScope;
             });
         });
 
-        console.log(Menu);
+        // Add the dashboard Menu option automatically.
+        var HtmlMenu = '<ul class="nav flex-column"><li class="nav-item">';
+        HtmlMenu += '<a class="nav-link" href="#">';
+        HtmlMenu += '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>';
+        HtmlMenu += 'Dashboard <span class="sr-only">(current)</span>';
+        HtmlMenu += '</a>';
+        HtmlMenu += '</li></ul>';
+
+        // Build out the Menu String.
+        $.each(Menu, function( key, value ) {
+            HtmlMenu += '<button class="accordion"> ' + key + ' </button>\n';
+            HtmlMenu += '<div class="panel">\n';
+            HtmlMenu += '<ul class="nav flex-column mb-2">\n';
+            $.each(value[0], function(_key, _value) {
+                HtmlMenu += '<li class="nav-item">\n';
+                HtmlMenu += '<a class="nav-link" href="#">\n';
+                HtmlMenu += '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>\n';
+                HtmlMenu += _value + '\n';
+                HtmlMenu += '</a>\n';
+                HtmlMenu += '</li>\n';
+            });
+            HtmlMenu += '</ul>\n';
+            HtmlMenu += '</div>\n';
+        });
+        sessionStorage.setItem("permittedMenu", HtmlMenu);
     },
     check() {
         var token = sessionStorage.getItem('id_token');
@@ -62,7 +88,7 @@ export default {
                 email: email,
                 password: password
             }
-        ).then(response => {
+        ).then((response) => {
             context.success = true;
         }, response => {
             context.error = true;
@@ -77,7 +103,6 @@ export default {
             Vue.http.headers.common['Authorization'] = 'Bearer ' + sessionStorage.getItem('id_token');
 
             this.buildmenu(response.data);
-
             router.push({
                 name: 'dashboard'
             });

@@ -7164,11 +7164,11 @@ var actions = {
         authenticated: false
     },
     buildmenu: function buildmenu(data) {
+        var Menu = {};
         this.user.profile = data.data;
         this.user.authenticated = true;
-
-        var Menu = [];
         var _roles = data.data.user.roles;
+
         $.each(_roles, function (key, value) {
             // Get all Unique Parent Names
             var _permissions = value.permissions;
@@ -7176,19 +7176,41 @@ var actions = {
                 return d.parent_name;
             }));
 
+            // Get all child menu associated with the parent and log into an array.
             $.each(UniqueParentNames, function (key, value) {
-                Menu[value] = $.map(_permissions, function (a, index) {
+                var localMenuScope = [];
+                localMenuScope.push($.map(_permissions, function (a, index) {
                     if (a.parent_name === value) return [a.name];
-                });
+                }));
+                Menu[value] = localMenuScope;
             });
         });
 
-        console.log(Menu);
+        // Add the dashboard Menu option automatically.
+        var HtmlMenu = '<ul class="nav flex-column"><li class="nav-item">';
+        HtmlMenu += '<a class="nav-link" href="#">';
+        HtmlMenu += '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>';
+        HtmlMenu += 'Dashboard <span class="sr-only">(current)</span>';
+        HtmlMenu += '</a>';
+        HtmlMenu += '</li></ul>';
 
-        //person["firstName"] = "John";
-
-        // var json = JSON.stringify(response.data.access.menu).replace(/\\/g, "").replace(/"{"/g, '{"').replace(/}"/g, '}');
-        // json = JSON.parse(json);
+        // Build out the Menu String.
+        $.each(Menu, function (key, value) {
+            HtmlMenu += '<button class="accordion"> ' + key + ' </button>\n';
+            HtmlMenu += '<div class="panel">\n';
+            HtmlMenu += '<ul class="nav flex-column mb-2">\n';
+            $.each(value[0], function (_key, _value) {
+                HtmlMenu += '<li class="nav-item">\n';
+                HtmlMenu += '<a class="nav-link" href="#">\n';
+                HtmlMenu += '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>\n';
+                HtmlMenu += _value + '\n';
+                HtmlMenu += '</a>\n';
+                HtmlMenu += '</li>\n';
+            });
+            HtmlMenu += '</ul>\n';
+            HtmlMenu += '</div>\n';
+        });
+        sessionStorage.setItem("permittedMenu", HtmlMenu);
     },
     check: function check() {
         var _this = this;
@@ -7227,7 +7249,6 @@ var actions = {
             __WEBPACK_IMPORTED_MODULE_0__tenantauth_js__["default"].http.headers.common['Authorization'] = 'Bearer ' + sessionStorage.getItem('id_token');
 
             _this2.buildmenu(response.data);
-
             __WEBPACK_IMPORTED_MODULE_0__tenantauth_js__["router"].push({
                 name: 'dashboard'
             });
@@ -42949,6 +42970,11 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
 
 
 /* harmony default export */ __webpack_exports__["default"] = ({
+    data: function data() {
+        return {
+            PermitedMenus: sessionStorage.getItem('permittedMenu')
+        };
+    },
     mounted: function mounted() {
         var chart = this.$refs.chart;
         var ctx = chart.getContext("2d");
@@ -42993,6 +43019,9 @@ Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
                 }
             });
         }
+    },
+    updated: function updated() {
+        sessionStorage.removeItem('permittedMenu');
     }
 });
 
@@ -55605,594 +55634,10 @@ var render = function() {
   var _c = _vm._self._c || _h
   return _c("div", { staticClass: "row" }, [
     _c("nav", { staticClass: "col-md-2 d-none d-md-block bg-light sidebar" }, [
-      _c("div", { staticClass: "sidebar-sticky" }, [
-        _c("ul", { staticClass: "nav flex-column" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "feather feather-home",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "24",
-                    height: "24",
-                    viewBox: "0 0 24 24",
-                    fill: "none",
-                    stroke: "currentColor",
-                    "stroke-width": "2",
-                    "stroke-linecap": "round",
-                    "stroke-linejoin": "round"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d: "M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"
-                    }
-                  }),
-                  _c("polyline", { attrs: { points: "9 22 9 12 15 12 15 22" } })
-                ]
-              ),
-              _vm._v("\n                    Dashboard "),
-              _c("span", { staticClass: "sr-only" }, [_vm._v("(current)")])
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "feather feather-file",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "24",
-                    height: "24",
-                    viewBox: "0 0 24 24",
-                    fill: "none",
-                    stroke: "currentColor",
-                    "stroke-width": "2",
-                    "stroke-linecap": "round",
-                    "stroke-linejoin": "round"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"
-                    }
-                  }),
-                  _c("polyline", { attrs: { points: "13 2 13 9 20 9" } })
-                ]
-              ),
-              _vm._v("\n                    Orders\n                    ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "feather feather-shopping-cart",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "24",
-                    height: "24",
-                    viewBox: "0 0 24 24",
-                    fill: "none",
-                    stroke: "currentColor",
-                    "stroke-width": "2",
-                    "stroke-linecap": "round",
-                    "stroke-linejoin": "round"
-                  }
-                },
-                [
-                  _c("circle", { attrs: { cx: "9", cy: "21", r: "1" } }),
-                  _c("circle", { attrs: { cx: "20", cy: "21", r: "1" } }),
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"
-                    }
-                  })
-                ]
-              ),
-              _vm._v("\n                    Products\n                    ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "feather feather-users",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "24",
-                    height: "24",
-                    viewBox: "0 0 24 24",
-                    fill: "none",
-                    stroke: "currentColor",
-                    "stroke-width": "2",
-                    "stroke-linecap": "round",
-                    "stroke-linejoin": "round"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: { d: "M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2" }
-                  }),
-                  _c("circle", { attrs: { cx: "9", cy: "7", r: "4" } }),
-                  _c("path", { attrs: { d: "M23 21v-2a4 4 0 0 0-3-3.87" } }),
-                  _c("path", { attrs: { d: "M16 3.13a4 4 0 0 1 0 7.75" } })
-                ]
-              ),
-              _vm._v("\n                    Customers\n                    ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "feather feather-bar-chart-2",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "24",
-                    height: "24",
-                    viewBox: "0 0 24 24",
-                    fill: "none",
-                    stroke: "currentColor",
-                    "stroke-width": "2",
-                    "stroke-linecap": "round",
-                    "stroke-linejoin": "round"
-                  }
-                },
-                [
-                  _c("line", {
-                    attrs: { x1: "18", y1: "20", x2: "18", y2: "10" }
-                  }),
-                  _c("line", {
-                    attrs: { x1: "12", y1: "20", x2: "12", y2: "4" }
-                  }),
-                  _c("line", {
-                    attrs: { x1: "6", y1: "20", x2: "6", y2: "14" }
-                  })
-                ]
-              ),
-              _vm._v("\n                    Reports\n                    ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "feather feather-layers",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "24",
-                    height: "24",
-                    viewBox: "0 0 24 24",
-                    fill: "none",
-                    stroke: "currentColor",
-                    "stroke-width": "2",
-                    "stroke-linecap": "round",
-                    "stroke-linejoin": "round"
-                  }
-                },
-                [
-                  _c("polygon", {
-                    attrs: { points: "12 2 2 7 12 12 22 7 12 2" }
-                  }),
-                  _c("polyline", { attrs: { points: "2 17 12 22 22 17" } }),
-                  _c("polyline", { attrs: { points: "2 12 12 17 22 12" } })
-                ]
-              ),
-              _vm._v("\n                    Integrations\n                    ")
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c(
-          "h6",
-          {
-            staticClass:
-              "sidebar-heading d-flex justify-content-between align-items-center px-3 mt-4 mb-1 text-muted"
-          },
-          [
-            _c("span", [_vm._v("Saved reports")]),
-            _vm._v(" "),
-            _c(
-              "a",
-              {
-                staticClass: "d-flex align-items-center text-muted",
-                attrs: { href: "#" }
-              },
-              [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "feather feather-plus-circle",
-                    attrs: {
-                      xmlns: "http://www.w3.org/2000/svg",
-                      width: "24",
-                      height: "24",
-                      viewBox: "0 0 24 24",
-                      fill: "none",
-                      stroke: "currentColor",
-                      "stroke-width": "2",
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "round"
-                    }
-                  },
-                  [
-                    _c("circle", { attrs: { cx: "12", cy: "12", r: "10" } }),
-                    _c("line", {
-                      attrs: { x1: "12", y1: "8", x2: "12", y2: "16" }
-                    }),
-                    _c("line", {
-                      attrs: { x1: "8", y1: "12", x2: "16", y2: "12" }
-                    })
-                  ]
-                )
-              ]
-            )
-          ]
-        ),
-        _vm._v(" "),
-        _c("ul", { staticClass: "nav flex-column mb-2" }, [
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "feather feather-file-text",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "24",
-                    height: "24",
-                    viewBox: "0 0 24 24",
-                    fill: "none",
-                    stroke: "currentColor",
-                    "stroke-width": "2",
-                    "stroke-linecap": "round",
-                    "stroke-linejoin": "round"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                    }
-                  }),
-                  _c("polyline", { attrs: { points: "14 2 14 8 20 8" } }),
-                  _c("line", {
-                    attrs: { x1: "16", y1: "13", x2: "8", y2: "13" }
-                  }),
-                  _c("line", {
-                    attrs: { x1: "16", y1: "17", x2: "8", y2: "17" }
-                  }),
-                  _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
-                ]
-              ),
-              _vm._v(
-                "\n                    Current month\n                    "
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "feather feather-file-text",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "24",
-                    height: "24",
-                    viewBox: "0 0 24 24",
-                    fill: "none",
-                    stroke: "currentColor",
-                    "stroke-width": "2",
-                    "stroke-linecap": "round",
-                    "stroke-linejoin": "round"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                    }
-                  }),
-                  _c("polyline", { attrs: { points: "14 2 14 8 20 8" } }),
-                  _c("line", {
-                    attrs: { x1: "16", y1: "13", x2: "8", y2: "13" }
-                  }),
-                  _c("line", {
-                    attrs: { x1: "16", y1: "17", x2: "8", y2: "17" }
-                  }),
-                  _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
-                ]
-              ),
-              _vm._v("\n                    Last quarter\n                    ")
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "feather feather-file-text",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "24",
-                    height: "24",
-                    viewBox: "0 0 24 24",
-                    fill: "none",
-                    stroke: "currentColor",
-                    "stroke-width": "2",
-                    "stroke-linecap": "round",
-                    "stroke-linejoin": "round"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                    }
-                  }),
-                  _c("polyline", { attrs: { points: "14 2 14 8 20 8" } }),
-                  _c("line", {
-                    attrs: { x1: "16", y1: "13", x2: "8", y2: "13" }
-                  }),
-                  _c("line", {
-                    attrs: { x1: "16", y1: "17", x2: "8", y2: "17" }
-                  }),
-                  _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
-                ]
-              ),
-              _vm._v(
-                "\n                    Social engagement\n                    "
-              )
-            ])
-          ]),
-          _vm._v(" "),
-          _c("li", { staticClass: "nav-item" }, [
-            _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-              _c(
-                "svg",
-                {
-                  staticClass: "feather feather-file-text",
-                  attrs: {
-                    xmlns: "http://www.w3.org/2000/svg",
-                    width: "24",
-                    height: "24",
-                    viewBox: "0 0 24 24",
-                    fill: "none",
-                    stroke: "currentColor",
-                    "stroke-width": "2",
-                    "stroke-linecap": "round",
-                    "stroke-linejoin": "round"
-                  }
-                },
-                [
-                  _c("path", {
-                    attrs: {
-                      d:
-                        "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                    }
-                  }),
-                  _c("polyline", { attrs: { points: "14 2 14 8 20 8" } }),
-                  _c("line", {
-                    attrs: { x1: "16", y1: "13", x2: "8", y2: "13" }
-                  }),
-                  _c("line", {
-                    attrs: { x1: "16", y1: "17", x2: "8", y2: "17" }
-                  }),
-                  _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
-                ]
-              ),
-              _vm._v(
-                "\n                    Year-end sale\n                    "
-              )
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("button", { staticClass: "accordion" }, [_vm._v("Saved Reports")]),
-        _vm._v(" "),
-        _c("div", { staticClass: "panel" }, [
-          _c("ul", { staticClass: "nav flex-column mb-2" }, [
-            _c("li", { staticClass: "nav-item" }, [
-              _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "feather feather-file-text",
-                    attrs: {
-                      xmlns: "http://www.w3.org/2000/svg",
-                      width: "24",
-                      height: "24",
-                      viewBox: "0 0 24 24",
-                      fill: "none",
-                      stroke: "currentColor",
-                      "stroke-width": "2",
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "round"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        d:
-                          "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                      }
-                    }),
-                    _c("polyline", { attrs: { points: "14 2 14 8 20 8" } }),
-                    _c("line", {
-                      attrs: { x1: "16", y1: "13", x2: "8", y2: "13" }
-                    }),
-                    _c("line", {
-                      attrs: { x1: "16", y1: "17", x2: "8", y2: "17" }
-                    }),
-                    _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
-                  ]
-                ),
-                _vm._v(
-                  "\n                        Current month\n                        "
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "feather feather-file-text",
-                    attrs: {
-                      xmlns: "http://www.w3.org/2000/svg",
-                      width: "24",
-                      height: "24",
-                      viewBox: "0 0 24 24",
-                      fill: "none",
-                      stroke: "currentColor",
-                      "stroke-width": "2",
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "round"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        d:
-                          "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                      }
-                    }),
-                    _c("polyline", { attrs: { points: "14 2 14 8 20 8" } }),
-                    _c("line", {
-                      attrs: { x1: "16", y1: "13", x2: "8", y2: "13" }
-                    }),
-                    _c("line", {
-                      attrs: { x1: "16", y1: "17", x2: "8", y2: "17" }
-                    }),
-                    _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
-                  ]
-                ),
-                _vm._v(
-                  "\n                        Last quarter\n                        "
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "feather feather-file-text",
-                    attrs: {
-                      xmlns: "http://www.w3.org/2000/svg",
-                      width: "24",
-                      height: "24",
-                      viewBox: "0 0 24 24",
-                      fill: "none",
-                      stroke: "currentColor",
-                      "stroke-width": "2",
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "round"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        d:
-                          "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                      }
-                    }),
-                    _c("polyline", { attrs: { points: "14 2 14 8 20 8" } }),
-                    _c("line", {
-                      attrs: { x1: "16", y1: "13", x2: "8", y2: "13" }
-                    }),
-                    _c("line", {
-                      attrs: { x1: "16", y1: "17", x2: "8", y2: "17" }
-                    }),
-                    _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
-                  ]
-                ),
-                _vm._v(
-                  "\n                        Social engagement\n                        "
-                )
-              ])
-            ]),
-            _vm._v(" "),
-            _c("li", { staticClass: "nav-item" }, [
-              _c("a", { staticClass: "nav-link", attrs: { href: "#" } }, [
-                _c(
-                  "svg",
-                  {
-                    staticClass: "feather feather-file-text",
-                    attrs: {
-                      xmlns: "http://www.w3.org/2000/svg",
-                      width: "24",
-                      height: "24",
-                      viewBox: "0 0 24 24",
-                      fill: "none",
-                      stroke: "currentColor",
-                      "stroke-width": "2",
-                      "stroke-linecap": "round",
-                      "stroke-linejoin": "round"
-                    }
-                  },
-                  [
-                    _c("path", {
-                      attrs: {
-                        d:
-                          "M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"
-                      }
-                    }),
-                    _c("polyline", { attrs: { points: "14 2 14 8 20 8" } }),
-                    _c("line", {
-                      attrs: { x1: "16", y1: "13", x2: "8", y2: "13" }
-                    }),
-                    _c("line", {
-                      attrs: { x1: "16", y1: "17", x2: "8", y2: "17" }
-                    }),
-                    _c("polyline", { attrs: { points: "10 9 9 9 8 9" } })
-                  ]
-                ),
-                _vm._v(
-                  "\n                        Year-end sale\n                        "
-                )
-              ])
-            ])
-          ])
-        ]),
-        _vm._v(" "),
-        _c("button", { staticClass: "accordion" }, [_vm._v("Section 1")]),
-        _vm._v(" "),
-        _vm._m(0),
-        _vm._v(" "),
-        _c("button", { staticClass: "accordion" }, [_vm._v("Section 2")]),
-        _vm._v(" "),
-        _vm._m(1),
-        _vm._v(" "),
-        _c("button", { staticClass: "accordion" }, [_vm._v("Section 3")]),
-        _vm._v(" "),
-        _vm._m(2)
-      ])
+      _c("div", {
+        staticClass: "sidebar-sticky",
+        domProps: { innerHTML: _vm._s(_vm.PermitedMenus) }
+      })
     ]),
     _vm._v(" "),
     _c(
@@ -56202,7 +55647,7 @@ var render = function() {
         attrs: { role: "main" }
       },
       [
-        _vm._m(3),
+        _vm._m(0),
         _vm._v(" "),
         _c(
           "div",
@@ -56214,7 +55659,7 @@ var render = function() {
             _c("h1", { staticClass: "h2" }, [_vm._v("Dashboard")]),
             _vm._v(" "),
             _c("div", { staticClass: "btn-toolbar mb-2 mb-md-0" }, [
-              _vm._m(4),
+              _vm._m(1),
               _vm._v(" "),
               _c(
                 "button",
@@ -56277,48 +55722,12 @@ var render = function() {
         _vm._v(" "),
         _c("h2", [_vm._v("Section title")]),
         _vm._v(" "),
-        _vm._m(5)
+        _vm._m(2)
       ]
     )
   ])
 }
 var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel" }, [
-      _c("p", [
-        _vm._v(
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel" }, [
-      _c("p", [
-        _vm._v(
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        )
-      ])
-    ])
-  },
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("div", { staticClass: "panel" }, [
-      _c("p", [
-        _vm._v(
-          "Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat."
-        )
-      ])
-    ])
-  },
   function() {
     var _vm = this
     var _h = _vm.$createElement

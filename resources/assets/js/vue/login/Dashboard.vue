@@ -97,8 +97,8 @@
 <template>
     <div class="row">
         <nav class="col-md-2 d-none d-md-block bg-light sidebar">
-            <div class="sidebar-sticky">
-                <ul class="nav flex-column">
+            <div class="sidebar-sticky" v-html="PermitedMenus">
+                <!-- <ul class="nav flex-column">
                     <li class="nav-item">
                         <a class="nav-link" href="#">
                         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
@@ -213,7 +213,7 @@
                 <button class="accordion">Section 3</button>
                 <div class="panel">
                     <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
-                </div>
+                </div>-->
             </div>
         </nav>
 
@@ -384,6 +384,11 @@
     import Chart from 'chart.js';
 
     export default {
+        data: function() {
+            return {
+                PermitedMenus: sessionStorage.getItem('permittedMenu')
+            }
+        },
         mounted: function () {
             var chart = this.$refs.chart;
             var ctx = chart.getContext("2d");
@@ -428,6 +433,9 @@
                     }
                 });
             }
+        },
+        updated: function() {
+            sessionStorage.removeItem('permittedMenu');
         }
     }
 </script>
