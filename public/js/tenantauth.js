@@ -7158,6 +7158,12 @@ var actions = {
     isavailableError: 'Unfortunately we are unable to determine the status of your request. Please check your data and re-try. Thanks.'
 };
 
+function toPascalCase(str) {
+    return str.toLowerCase().replace(/\b[a-z]/g, function (txtVal) {
+        return txtVal.toUpperCase();
+    });
+}
+
 /* harmony default export */ __webpack_exports__["a"] = ({
     user: {
         profile: null,
@@ -7180,7 +7186,7 @@ var actions = {
             $.each(UniqueParentNames, function (key, value) {
                 var localMenuScope = [];
                 localMenuScope.push($.map(_permissions, function (a, index) {
-                    if (a.parent_name === value) return [a.name];
+                    if (a.parent_name.toLowerCase() === value.toLowerCase()) return [a.name];
                 }));
                 Menu[value] = localMenuScope;
             });
@@ -7196,14 +7202,14 @@ var actions = {
 
         // Build out the Menu String.
         $.each(Menu, function (key, value) {
-            HtmlMenu += '<button class="accordion"> ' + key + ' </button>\n';
+            HtmlMenu += '<button class="accordion"> ' + toPascalCase(key) + ' </button>\n';
             HtmlMenu += '<div class="panel">\n';
             HtmlMenu += '<ul class="nav flex-column mb-2">\n';
             $.each(value[0], function (_key, _value) {
                 HtmlMenu += '<li class="nav-item">\n';
                 HtmlMenu += '<a class="nav-link" href="#">\n';
                 HtmlMenu += '<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-file"><path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path><polyline points="13 2 13 9 20 9"></polyline></svg>\n';
-                HtmlMenu += _value + '\n';
+                HtmlMenu += toPascalCase(_value) + '\n';
                 HtmlMenu += '</a>\n';
                 HtmlMenu += '</li>\n';
             });
