@@ -33,6 +33,10 @@
         </div>
     </footer>
 
+    <script>
+        var vue_devtools = '<?php echo env('VUE_DEVTOOLS'); ?>';
+        var production_tip = '<?php echo env('VUE_PRODUCTIONTIP'); ?>';
+    </script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/tenantauth.js') }}"></script>

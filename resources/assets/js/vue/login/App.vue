@@ -40,6 +40,100 @@
         /* border-color: transparent;
         box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.25); */
     }
+
+    .feather {
+        width: 16px;
+        height: 16px;
+        vertical-align: text-bottom;
+    }
+
+    /* Sidebar */
+    .sidebar {
+        position: fixed;
+        top: 0;
+        bottom: 0;
+        left: 0;
+        z-index: 100; /* Behind the navbar */
+        padding: 48px 0 0; /* Height of navbar */
+        box-shadow: inset -1px 0 0 rgba(0, 0, 0, 0.1);
+    }
+
+    .sidebar-sticky {
+        position: relative;
+        top: 0;
+        height: calc(100vh - 48px);
+        padding-top: 0.5rem;
+        overflow-x: hidden;
+        overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+    }
+
+    @supports ((position: -webkit-sticky) or (position: sticky)) {
+        .sidebar-sticky {
+            position: -webkit-sticky;
+            position: sticky;
+        }
+    }
+
+    .sidebar .nav-link {
+        font-weight: 500;
+        color: #333;
+    }
+
+    .sidebar .nav-link .feather {
+        margin-right: 4px;
+        color: #999;
+    }
+
+    .sidebar .nav-link.active {
+        color: #007bff;
+    }
+
+    .sidebar .nav-link:hover .feather, .sidebar .nav-link.active .feather {
+        color: inherit;
+    }
+
+    .sidebar-heading {
+        font-size: 0.75rem;
+        text-transform: uppercase;
+    }
+
+    /* Content */
+    [role="main"] {
+        padding-top: 48px; /* Space for fixed navbar */
+    }
+
+    .accordion {
+        background-color: #eee;
+        color: #444;
+        cursor: pointer;
+        padding: 18px;
+        width: 100%;
+        border: none;
+        text-align: left;
+        outline: none;
+        font-size: 15px;
+        transition: 0.4s;
+    }
+
+    .accordion:hover {
+        background-color: #ccc;
+    }
+
+    .accordion:after {
+        content: '\002B';
+        color: #777;
+        font-weight: bold;
+        float: right;
+        margin-left: 5px;
+    }
+
+    .panel {
+        padding: 0 18px;
+        background-color: white;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.2s ease-out;
+    }
 </style>
 
 <template>
@@ -92,16 +186,28 @@
                 </nav>
             </div>
         </div>
-        <router-view style="color:black;"></router-view>
+        <div class="row">
+            <nav class="col-md-2 d-none d-md-block bg-light sidebar" v-if="auth.user.authenticated">
+                <div class="sidebar-sticky" v-html="PermitedMenus"></div>
+            </nav>
+            <main role="main" class="col-md-10 ml-sm-auto col-lg-10 px-4">
+                <router-view class="col-md-10" style="color:black;"></router-view>
+            </main>
+        </div>
     </div>
 </template>
 
+<script src="https://unpkg.com/feather-icons/dist/feather.min.js"></script>
+<script>
+    feather.replace()
+</script>
 <script>
     import auth from '../../auth.js'
     export default {
         data() {
             return {
-                auth: auth
+                auth: auth,
+                PermitedMenus: ''
             };
         },
         methods: {
@@ -117,6 +223,11 @@
             this.$nextTick(function () {
                 auth.check();
             });
+        },
+        updated: function() {
+            if (auth.user.authenticated) {
+                this.PermitedMenus = sessionStorage.getItem('permittedMenu');
+            }
         }
     }
 </script>

@@ -1,12 +1,16 @@
 import Vue from 'vue';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
-import { App, Home, Reset, Signin,Register, Dashboard, ForgotPassword, library, FontAwesomeIcon } from './imports.js';
+import {
+    App, Home, Reset, Signin, Profile,
+    Register, Dashboard, ForgotPassword, library, FontAwesomeIcon
+} from './imports.js';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
 Vue.config.productionTip = false;
+Vue.config.devtools = vue_devtools;
 Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 Vue.http.options.root = 'https://pentaville.erp.dev/';
@@ -46,6 +50,11 @@ export var router = new VueRouter({
             path: '/reset',
             name: 'reset',
             component: Reset
+        },
+        {
+            path: '/profile',
+            name: 'profile',
+            component: Profile
         }
     ]
 });
