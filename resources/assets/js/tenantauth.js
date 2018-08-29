@@ -1,28 +1,17 @@
 import Vue from 'vue';
-import App from './App.vue';
-import Home from './Home.vue';
-import Reset from './Reset.vue';
-import Signin from './Signin.vue';
 import VueRouter from 'vue-router';
-import Register from './Register.vue';
 import VueResource from 'vue-resource';
-import ForgotPassword from './ForgotPassword.vue';
-import Dashboard from './Dashboard.vue';
-import { library } from '../components/@fortawesome/fontawesome-svg-core';
-import { FontAwesomeIcon } from '../components/@fortawesome/vue-fontawesome';
-import { faSignInAlt, faUserPlus, faHome, faSignOutAlt, faLock } from '../components/@fortawesome/free-solid-svg-icons';
+import { App, Home, Reset, Signin,Register, Dashboard, ForgotPassword, library, FontAwesomeIcon } from './imports.js';
 
 Vue.use(VueRouter);
 Vue.use(VueResource);
 
-library.add(faSignInAlt, faUserPlus, faHome, faSignOutAlt, faLock);
-
 Vue.config.productionTip = false;
+Vue.component('font-awesome-icon', FontAwesomeIcon);
+
 Vue.http.options.root = 'https://pentaville.erp.dev/';
 Vue.http.headers.common['Authorization'] = 'Bearer ' + sessionStorage.getItem('id_token');
 Vue.http.headers.common['X-CSRF-TOKEN'] = document.getElementsByName('csrf-token')[0].getAttribute('content');
-
-Vue.component('font-awesome-icon', FontAwesomeIcon);
 
 export default Vue;
 

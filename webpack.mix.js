@@ -28,7 +28,7 @@ mix.copy([
 ], 'public/css');
 
 // Copy the needed Js file for the auth front end
-mix.js('resources/assets/js/vue/login/tenantauth.js', 'public/js');
+mix.js('resources/assets/js/tenantauth.js', 'public/js');
 
 mix.copyDirectory('node_modules/@fortawesome', 'resources/assets/js/vue/components/@fortawesome');
 
