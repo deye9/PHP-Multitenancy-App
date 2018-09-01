@@ -21,12 +21,14 @@ class CreateTenant extends Command
 
         if (Tenant::tenantExists($name)) {
             $this->error("A tenant with name '{$name}' already exists.");
+
             return;
         }
 
         $tenant = Tenant::registerTenant($name, $email, $password);
         $this->info("Tenant '{$name}' is created and is now accessible at {$tenant->hostname->fqdn}");
 
+        // Invite Admin
         $tenant->admin->notify(new TenantCreated($tenant->hostname));
         $this->info("Admin {$email} can log in using password {$password}");
     }

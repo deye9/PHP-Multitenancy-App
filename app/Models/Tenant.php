@@ -39,6 +39,15 @@ class Tenant
         }
     }
 
+    public static function deleteByFqdn($fqdn)
+    {
+        if ($tenant = Hostname::where('fqdn', $name)->firstOrFail()) {
+            app(HostnameRepository::class)->delete($tenant, true);
+            app(WebsiteRepository::class)->delete($tenant->website, true);
+            return "Tenant {$name} successfully deleted.";
+        }
+    }
+
     public static function registerTenant($name, $email, $password): Tenant
     {
         // Convert all to lowercase
