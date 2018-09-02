@@ -13,7 +13,8 @@ var mix = require('laravel-mix');
 
 mix
     .js('resources/assets/js/app.js', 'public/js')
-    .sass('resources/assets/sass/app.scss', 'public/css');
+    .sass('resources/assets/sass/app.scss', 'public/css')
+    .sass('resources/assets/sass/tabs.scss', 'public/css');
 
 // Copy the needed javascript files to the public/js folder
 mix.copy([

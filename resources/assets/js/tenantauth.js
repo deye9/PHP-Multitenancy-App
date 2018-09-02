@@ -1,4 +1,5 @@
 import Vue from 'vue';
+import Vuetify from 'vuetify';
 import VueRouter from 'vue-router';
 import VueResource from 'vue-resource';
 import {
@@ -6,6 +7,9 @@ import {
     Register, Dashboard, ForgotPassword, library, FontAwesomeIcon
 } from './imports.js';
 
+Vue.use(Vuetify, {
+    iconfont: 'fa4'
+   });
 Vue.use(VueRouter);
 Vue.use(VueResource);
 

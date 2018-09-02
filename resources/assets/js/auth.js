@@ -47,10 +47,6 @@ export default {
             });
         });
 
-        // <router-link to="forgotpassword" class="btn btn-link float-left">
-        //     Forgot Your Password?
-        // </router-link>
-
         // Add the Dashboard and Profile Menu option automatically.
         var HtmlMenu = '<div class="sidebar-sticky">';
         HtmlMenu += '<ul class="nav flex-column"><li class="nav-item">';

@@ -11,6 +11,7 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ config('app.name', 'Welcome to School ERP') }}</title>
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@1.2.0-beta.3/dist/vuetify.min.css" rel="stylesheet">
     <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
     @yield('styles')
@@ -37,6 +38,7 @@
         var vue_devtools = '<?php echo env('VUE_DEVTOOLS'); ?>';
         var production_tip = '<?php echo env('VUE_PRODUCTIONTIP'); ?>';
     </script>
+    <script src="https://unpkg.com/vuetify/dist/vuetify.min.js"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
     <script src="{{ asset('js/tenantauth.js') }}"></script>
