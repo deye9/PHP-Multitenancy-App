@@ -11,58 +11,15 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
     <title>{{ config('app.name', 'Welcome to School ERP') }}</title>
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/vuetify@1.2.0-beta.3/dist/vuetify.min.css" rel="stylesheet">
+    <link href="{{ asset('css/main.css') }}" rel="stylesheet">
     <link href="{{ asset('css/bootstrap.min.css') }}" rel="stylesheet">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" rel="stylesheet" type="text/css">
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ" crossorigin="anonymous">
     @yield('styles')
 </head>
 
 <body>
 
-    <nav class="navbar navbar-dark bg-dark fixed-top">
-        @guest
-            <a class="navbar-brand" href="{{ url('/') }}"  title="Change to school Logo and get School Name">
-                <img src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
-                {{ config('app.name', 'School ERP') }}
-            </a>
-        @else
-            <a class="navbar-brand" href="{{ route('home') }}"  title="Change to school Logo and get School Name" >
-                <img src="https://getbootstrap.com/docs/4.1/assets/brand/bootstrap-solid.svg" width="30" height="30" class="d-inline-block align-top" alt="" />
-                {{ config('app.name', 'School ERP') }}
-            </a>
-        @endguest
-
-        @if (Route::has('login'))
-            <ul class="nav justify-content-end">
-                @auth
-                    <li class="nav-item">
-                        <form class="navbar-form" role="search">
-                            <div class="input-group">
-                                <input class="form-control" type="search" placeholder="Search" aria-label="Search">
-                                <div class="input-group-append">
-                                    <button class="btn btn-outline-secondary" type="submit">
-                                        <i class="fas fa-search"></i>
-                                    </button>
-                                </div>
-                            </div>
-                        </form>
-                    </li>
-                @else
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('login') }}">Login</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link disabled" href="{{ route('register') }}">Register</a>
-                    </li>
-                @endauth
-            </ul>
-        @endif
-    </nav>
-
-    <div id="app" class="m-t-2">
-        @yield('content')
-    </div>
+    <div id="app"></div>
 
     <footer class="footer" style="text-align: center;">
         <div class="container">
@@ -77,12 +34,14 @@
         </div>
     </footer>
 
+    <script>
+        var vue_devtools = '<?php echo env('VUE_DEVTOOLS'); ?>';
+        var production_tip = '<?php echo env('VUE_PRODUCTIONTIP'); ?>';
+    </script>
+    <script src="https://unpkg.com/vuetify/dist/vuetify.min.js"></script>
     <script src="{{ asset('js/jquery.min.js') }}"></script>
     <script src="{{ asset('js/bootstrap.min.js') }}"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/es6-promise@4/dist/es6-promise.auto.js"></script>
-    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/js/toastr.min.js"></script>
-    <script src="{{ asset('js/landing.js') }}"></script>
-    @yield('scripts')
+    <script src="{{ asset('js/tenantauth.js') }}"></script>
 </body>
 
 </html>

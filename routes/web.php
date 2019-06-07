@@ -11,10 +11,6 @@
 |
 */
 
-Route::group(['middleware' => 'tenancy.enforce'], function () {
-    Auth::routes();
-});
-
 // Route::get('/home', 'HomeController@index')->name('home');
 
 Route::get('/', function () {
@@ -45,3 +41,7 @@ Route::get('/home', function () {
 
     return App::call('App\Http\Controllers\Tenants\DefaultController@home');
 })->name('home');
+
+Route::group(['middleware' => 'tenancy.enforce'], function () {
+    Auth::routes();
+});

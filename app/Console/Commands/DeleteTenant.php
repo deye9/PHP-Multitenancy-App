@@ -2,7 +2,7 @@
 
 namespace App\Console\Commands;
 
-use App\Tenant;
+use App\Models\Tenant;
 use Illuminate\Console\Command;
 
 class DeleteTenant extends Command
@@ -14,7 +14,7 @@ class DeleteTenant extends Command
     {
         // because this is a destructive command, we'll only allow to run this command
         // if you are on the local environment
-        if (!app()->isLocal()) {
+        if (!app()->isLocal() && !app()->runningUnitTests()) {
             $this->error('This command is only avilable on the local environment.');
 
             return;

@@ -2,9 +2,7 @@
 
 namespace App\Http\Controllers\api;
 
-use App\Tenant;
-use App\HttpStatusCode;
-use App\ResponseMessage;
+use App\Models\Tenant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Http\Controllers\Controller;
@@ -28,13 +26,13 @@ class ValidateController extends Controller
             $password = $request->input('password');
 
             if (Tenant::tenantExists($name)) {
-                $msg = "{$name} already exists. " . ResponseMessage::SCHOOL_NAME_UNAVAILABLE;
+                $msg = "{$name} already exists. " . $this::SCHOOL_NAME_UNAVAILABLE;
                 Log::error("[ " . $this->tag . '::School Registration ]: ' . $msg);
 
                 return $this->jsonResponse([
                     'status' => "Error",
                     'message' => $msg
-                ], HttpStatusCode::BAD_REQUEST);
+                ], $this::BAD_REQUEST);
             }
 
             // Validate the request.
@@ -42,14 +40,14 @@ class ValidateController extends Controller
 
             if ($validator->fails())
             {
-                $msg = ResponseMessage::ERROR_CREATING_SCHOOL . " [{$name}].";
+                $msg = $this::ERROR_CREATING_SCHOOL . " [{$name}].";
                 Log::info('[ ' . $this->tag . '::New Tenant Registration Error]: ' . json_encode($validator->failed()));
 
                 return $this->jsonResponse([
                     'status' => "Error",
                     'message' => $msg,
                     'data' => $validator->failed()
-                ], HttpStatusCode::BAD_REQUEST);
+                ], $this::BAD_REQUEST);
             }
 
             // Create the Tenant as requested.
@@ -70,14 +68,14 @@ class ValidateController extends Controller
             return $this->jsonResponse([
                 'status' => 'Success',
                 'message' => $msg
-            ], HttpStatusCode::OK);
+            ], $this::OK);
         }
         catch (Exception $e) {
             Log::error($this->tag . '::School Registration Failed ' . $e->getMessage());
             return $this->jsonResponse([
                 'status' => 'Error',
                 'message' => $e->getMessage()
-            ], HttpStatusCode::INTERNAL_SERVER_ERROR);
+            ], $this::INTERNAL_SERVER_ERROR);
         }
     }
 
@@ -94,30 +92,37 @@ class ValidateController extends Controller
                 return $this->jsonResponse([
                     'err_status' => 'Error',
                     'err_message' => 'Invalid School Name specified.'
-                ], HttpStatusCode::BAD_REQUEST);
+                ], $this::BAD_REQUEST);
+            }
+
+            if (!preg_match("/^([A-Za-z0-9]|[A-Za-z0-9][A-Za-z0-9\-]*[A-Za-z0-9])$/",$name)) {
+                return $this->jsonResponse([
+                    'err_status' => 'Error',
+                    'err_message' => 'Invalid School Name specified.'
+                ], $this::BAD_REQUEST);
             }
 
             if (Tenant::tenantExists($name)) {
-                $msg = "{$name} already exists. " . ResponseMessage::SCHOOL_NAME_UNAVAILABLE;
+                $msg = "{$name} already exists. " . $this::SCHOOL_NAME_UNAVAILABLE;
                 Log::error("[ " . $this->tag . '::Is HostName Available ]: ' . $msg);
 
                 return $this->jsonResponse([
                     'status' => "Error",
                     'message' => $msg
-                ], HttpStatusCode::BAD_REQUEST);
+                ], $this::BAD_REQUEST);
             }
 
             return $this->jsonResponse([
                 'status' => 'Success',
-                'message' => ResponseMessage::SCHOOL_NAME_AVAILABLE
-            ], HttpStatusCode::OK);
+                'message' => $this::SCHOOL_NAME_AVAILABLE
+            ], $this::OK);
         }
         catch (Exception $e) {
             Log::error($this->tag . '::Error checking availability of Name ' . $e->getMessage());
             return $this->jsonResponse([
                 'status' => 'Error',
                 'message' => $e->getMessage()
-            ], HttpStatusCode::INTERNAL_SERVER_ERROR);
+            ], $this::INTERNAL_SERVER_ERROR);
         }
     }
 }

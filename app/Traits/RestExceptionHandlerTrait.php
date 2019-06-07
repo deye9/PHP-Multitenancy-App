@@ -2,7 +2,6 @@
 
 namespace App\Traits;
 
-use App\HttpStatusCode;
 use Exception;
 use Illuminate\Database\Eloquent\ModelNotFoundException;
 use Illuminate\Http\ResponseTrait;
@@ -64,7 +63,7 @@ trait RestExceptionHandlerTrait
      */
     protected function isBadRequestException(Exception $ex)
     {
-        return ($ex instanceof HttpException && $ex->getStatusCode() === HttpStatusCode::BAD_REQUEST);
+        return ($ex instanceof HttpException && $ex->getStatusCode() === 400);
     }
 
     /**
@@ -76,7 +75,7 @@ trait RestExceptionHandlerTrait
     protected function isMethodNotAllowedException(Exception $ex)
     {
         return ($ex instanceof MethodNotAllowedHttpException &&
-            $ex->getStatusCode() === HttpStatusCode::METHOD_NOT_ALLOWED);
+            $ex->getStatusCode() === 405);
     }
 
     /**

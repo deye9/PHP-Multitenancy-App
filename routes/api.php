@@ -12,12 +12,35 @@ use Illuminate\Http\Request;
 | is assigned the "api" middleware group. Enjoy building your API!
 |
 */
-
 Route::group(['prefix' => 'tenant'], function() {
-    Route::post('/register', 'ValidateController@register')->name('register');
+    Route::post('/registerschool', 'ValidateController@register')->name('register');
     Route::get('/isavailable/{name}', 'ValidateController@isavailable')->name('isavailable');
 });
 
-Route::middleware('auth:api')->get('/user', function (Request $request) {
-    return $request->user();
+Route::post('/registeruser', [
+    'uses' => 'AuthController@register',
+]);
+
+Route::post('/signin',  [
+    'uses' => 'AuthController@signin',
+]);
+
+Route::group(['middleware' => 'tenancy.enforce'], function () {
+    Route::post('/forgotpassword',  [
+        'uses' => 'AuthController@forgotpassword',
+    ]);
+
+    Route::post('/resetpassword', [
+        'uses' => 'AuthController@resetpassword',
+    ]);
 });
+
+Route::group(['middleware' => 'jwt.auth'], function () {
+    Route::get('/user', [
+        'uses' => 'AuthController@vettoken',
+    ]);
+});
+
+// Route::middleware('auth:api')->get('/user', function (Request $request) {
+//     return $request->user();
+// });

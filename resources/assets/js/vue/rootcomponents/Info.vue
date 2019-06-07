@@ -1,6 +1,6 @@
 <template>
 
-    <div class="content">
+    <div class="container">
 
         <div v-if="infoview === 'moreInfo'">
 
@@ -256,7 +256,7 @@
     }
 </script>
 
-<style scoped>
+<style>
     html, body {
         background-color: #fff;
         color: #636b6f;

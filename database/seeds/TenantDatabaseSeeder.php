@@ -14,28 +14,21 @@ class TenantDatabaseSeeder extends Seeder
 
     private function addRolesAndPermissions()
     {
-        // create permissions for an admin
-        $adminPermissions = collect(['create user', 'edit user', 'delete user'])->map(function ($name) {
-            return Permission::create(['name' => $name]);
+        // create permissions for an admin alongside all default permissions.
+        Permission::create(['parent_name' => 'dashboard','name' => 'dashboard']);
+        $adminPermissions = collect(['users', 'metadata', 'permissions', 'roles'])->map(function ($name) {
+            return Permission::create(['parent_name' => 'administration','name' => $name]);
         });
 
         // add default roles
         $adminRole = Role::create(['name' => 'admin']);
         $adminRole->givePermissionTo($adminPermissions);
 
-        $adminRole = Role::create(['name' => 'student']);
-        $adminRole->givePermissionTo($adminPermissions);
+        Role::create(['name' => 'student']);
+        Role::create(['name' => 'staff']);
+        Role::create(['name' => 'hod']);
 
-        $adminRole = Role::create(['name' => 'staff']);
-        $adminRole->givePermissionTo($adminPermissions);
-
-        $adminRole = Role::create(['name' => 'hod']);
-        $adminRole->givePermissionTo($adminPermissions);
-
-        $adminRole = Role::create(['name' => 'guest']);
-        $adminRole->givePermissionTo($adminPermissions);
-
-        // add a default user role
-        Role::create(['name' => 'user']);
+        // add a default guest role
+        Role::create(['name' => 'guest']);
     }
 }
