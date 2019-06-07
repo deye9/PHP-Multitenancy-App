@@ -1,0 +1,40 @@
+extend type Query {
+    me: User @auth
+    metadatas: [Metadata!]! @all(model: "App\\Models\\Metadata")
+    registration(id: ID @eq key: String @eq): Metadata @find(model: "App\\Models\\Metadata")
+    getKeys: [Metadata!]! @field(resolver: "App\\Http\\GraphQL\\Queries\\MetadataQuery@keys")
+    getbranches: [Metadata!]! @field(resolver: "App\\Http\\GraphQL\\Queries\\MetadataQuery@branches")
+    filterbykey(key: String @eq): [Metadata!]! @field(resolver: "App\\Http\\GraphQL\\Queries\\MetadataQuery@keyFilter")
+    getbranch(id: ID @eq BranchName: String @eq): Metadata @field(resolver: "App\\Http\\GraphQL\\Queries\\MetadataQuery@searchBranch")
+}
+
+extend type Mutation {
+    createMetadata (input: CreateMetadataInput!): Metadata @field(resolver: "App\\Http\\GraphQL\\Mutations\\MetadataMutator@create")
+    updateMetadata (input: UpdateMetadataInput!): Metadata @field(resolver: "App\\Http\\GraphQL\\Mutations\\MetadataMutator@update")
+    deleteMetadata (input: DeleteMetadataInput!): Metadata @field(resolver: "App\\Http\\GraphQL\\Mutations\\MetadataMutator@delete")
+}
+
+type Metadata {
+    id: ID
+    key: String!
+    value: String!
+    created_at: DateTime!
+    updated_at: DateTime
+}
+
+input CreateMetadataInput
+{
+    key: String @rules(apply: ["required"])
+    value: String @rules(apply: ["required"])
+}
+
+input UpdateMetadataInput
+{
+    id: ID! @rules(apply: ["required"])
+    key: String
+    value: String
+}
+
+input DeleteMetadataInput {
+    id: ID! @rules(apply: ["required"])
+}
