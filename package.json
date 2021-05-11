@@ -73,7 +73,7 @@
         "gulp": "^4.0.0",
         "jquery": "^3.4.1",
         "laravel-mix": "^2.1.14",
-        "lodash": "^4.17.11",
+        "lodash": "^4.17.21",
         "material-design-icons-iconfont": "^4.0.2",
         "popper": "^1.0.1",
         "style-loader": "^0.23.1",
