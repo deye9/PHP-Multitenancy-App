@@ -23,7 +23,7 @@
         "apollo-client": "^2.4.5",
         "apollo-link": "^1.2.3",
         "apollo-link-http": "^1.5.5",
-        "chart.js": "^2.7.3",
+        "chart.js": "^2.9.4",
         "font-awesome": "^4.7.0",
         "graphql": "^14.0.2",
         "graphql-tag": "^2.10.0",
